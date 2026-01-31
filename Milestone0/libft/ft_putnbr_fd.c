@@ -6,7 +6,7 @@
 /*   By: exia <exia@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 19:02:45 by exia              #+#    #+#             */
-/*   Updated: 2026/01/23 17:36:41 by exia             ###   ########.fr       */
+/*   Updated: 2026/01/28 12:54:35 by exia             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,20 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	char	*a;
+	char	a;
 
-	a = ft_itoa(n);
-	if (!a)
+	if (n == INT_MIN)
+	{
+		write(fd, "-2147483648", 11);
 		return ;
-	write(fd, a, ft_strlen(a));
-	free(a);
+	}
+	if (n < 0)
+	{
+		write(fd, "-", 1);
+		n = -n;
+	}
+	if (n / 10)
+		ft_putnbr_fd(n / 10, fd);
+	a = '0' + (n % 10);
+	write(fd, &a, 1);
 }

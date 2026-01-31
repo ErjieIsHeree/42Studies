@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: exia <exia@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/20 19:02:45 by exia              #+#    #+#             */
-/*   Updated: 2026/01/23 17:36:41 by exia             ###   ########.fr       */
+/*   Created: 2026/01/28 09:51:42 by exia              #+#    #+#             */
+/*   Updated: 2026/01/31 20:34:08 by exia             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-void	ft_putnbr_fd(int n, int fd)
-{
-	char	*a;
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
-	a = ft_itoa(n);
-	if (!a)
-		return ;
-	write(fd, a, ft_strlen(a));
-	free(a);
-}
+# include <stdlib.h>
+# include <unistd.h>
+# include <limits.h>
+
+char	*get_next_line(int fd);
+void	*ft_calloc(size_t nmemb, size_t size);
+size_t	ft_strlen_c(const char *s, const char c);
+void	ft_bzero(void *s, size_t n);
+char	*ft_strdup(const char *s);
+
+#endif

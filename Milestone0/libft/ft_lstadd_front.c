@@ -6,7 +6,7 @@
 /*   By: exia <exia@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 15:39:32 by exia              #+#    #+#             */
-/*   Updated: 2026/01/22 16:50:39 by exia             ###   ########.fr       */
+/*   Updated: 2026/01/28 15:38:05 by exia             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	ft_lstadd_front(t_list **lst, t_list *new)
 {
 	if (!lst || !new)
 		return ;
-	if (*lst)
-		new->next = *lst;
+	new->next = *lst;
 	*lst = new;
 }

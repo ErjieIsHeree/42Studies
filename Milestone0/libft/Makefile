@@ -6,22 +6,20 @@
 #    By: exia <exia@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/15 12:12:04 by exia              #+#    #+#              #
-#    Updated: 2026/01/25 18:44:16 by exia             ###   ########.fr        #
+#    Updated: 2026/01/28 12:40:44 by exia             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# Variables
-
-## Compiler
+# Compiler
 COMPILER := cc
 CFLAGS := -Wall -Werror -Wextra
 
-## File
+# File
 NAME := libft.a
 AR := ar
 ARFLAGS := rcs
 
-## Source
+# Source
 TEST := test.c
 SRCS := ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c\
 			ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c\
@@ -31,13 +29,14 @@ SRCS := ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c\
 			ft_toupper.c ft_memchr.c ft_strdup.c ft_substr.c\
 			ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c\
 			ft_strmapi.c ft_striteri.c ft_putchar_fd.c\
-			ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c\
-			ft_lstnew.c ft_lstadd_front.c ft_lstsize.c\
+			ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
+SRC_BNS := ft_lstnew.c ft_lstadd_front.c ft_lstsize.c\
 			ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c\
 			ft_lstclear.c ft_lstiter.c ft_lstmap.c
 OBJS := $(SRCS:.c=.o)
+OBJS_BNS := $(SRC_BNS:.c=.o)
 
-## Delete
+# Delete
 CLEAN := rm
 CLFLAGS := -f
 
@@ -46,19 +45,21 @@ CLFLAGS := -f
 all: $(NAME)
 
 ## Testing
-test: $(TEST) $(SRCS)
+test: $(TEST) $(SRCS) $(OBJS_BNS)
 	$(COMPILER) $(CFLAGS) $^ -lbsd -g
 
 testo: $(TEST)
 	$(COMPILER) $(CFLAGS) $^
 
 ## Base
-$(NAME): $(OBJS)
-	$(AR) $(ARFLAGS) $(NAME) $(OBJS)
+$(NAME): $(OBJS) $(OBJS_BNS)
+	$(AR) $(ARFLAGS) $(NAME) $^
 	@echo "Libreria creada"
 
+bonus: all
+
 clean: 
-	$(CLEAN) $(CLFLAGS) $(OBJS)
+	$(CLEAN) $(CLFLAGS) $(OBJS) $(OBJS_BNS)
 	@echo "Archivos .o eliminados"
 
 fclean: clean
@@ -68,4 +69,4 @@ fclean: clean
 re: fclean all
 
 # Phony
-.PHONY: all test testo $(NAME) clean fclean re
+.PHONY: all test testo bonus clean fclean re

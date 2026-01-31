@@ -6,7 +6,7 @@
 #    By: exia <exia@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/15 12:12:04 by exia              #+#    #+#              #
-#    Updated: 2026/01/25 18:42:45 by exia             ###   ########.fr        #
+#    Updated: 2026/01/27 15:12:55 by exia             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,10 @@ ARFLAGS := rcs
 
 # Source
 TEST := test.c
-SRCS := 
+SRCS := ft_printf.c put_functions.c
+UTILS := utils.c
 OBJS := $(SRCS:.c=.o)
+UTILS_OBJS := $(UTILS:.c=.o)
 
 # Delete
 CLEAN := rm
@@ -33,19 +35,25 @@ CLFLAGS := -f
 all: $(NAME)
 
 ## Testing
-test: $(TEST) $(SRCS)
-	$(COMPILER) $(CFLAGS) $^ -lbsd -g
+test: $(TEST) $(SRCS) $(UTILS)
+	$(COMPILER) $(CFLAGS) $^ -g
 
-testo: $(TEST)
-	$(COMPILER) $(CFLAGS) $^
+testw: $(TEST) $(SRCS) $(UTILS)
+	$(COMPILER) $(CFLAGS) $^ -g -w
+
+testo: $(TEST) #$(wildcard *) # REMOVE WILDCARD BEFORE EVALUATING
+	$(COMPILER) $(CFLAGS) $^ -g
+
+testow: $(TEST) #$(wildcard *) # REMOVE WILDCARD BEFORE EVALUATING
+	$(COMPILER) $(CFLAGS) $^ -g -w
 
 ## Base
-$(NAME): $(OBJS)
-	$(AR) $(ARFLAGS) $(NAME) $(OBJS)
+$(NAME): $(OBJS) $(UTILS_OBJS)
+	$(AR) $(ARFLAGS) $(NAME) $^
 	@echo "Libreria creada"
 
 clean: 
-	$(CLEAN) $(CLFLAGS) $(OBJS)
+	$(CLEAN) $(CLFLAGS) $(OBJS) $(UTILS_OBJS)
 	@echo "Archivos .o eliminados"
 
 fclean: clean
@@ -55,4 +63,4 @@ fclean: clean
 re: fclean all
 
 # Phony
-.PHONY: all test testo $(NAME) clean fclean re
+.PHONY: all test testw testo testow clean fclean re

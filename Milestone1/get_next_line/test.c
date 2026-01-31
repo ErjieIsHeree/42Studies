@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: exia <exia@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/20 18:51:42 by exia              #+#    #+#             */
-/*   Updated: 2026/01/20 18:57:10 by exia             ###   ########.fr       */
+/*   Created: 2026/01/31 14:36:04 by exia              #+#    #+#             */
+/*   Updated: 2026/01/31 20:29:28 by exia             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdio.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <stdlib.h>
 
-void	ft_putchar_fd(char c, int fd)
+int	main(void)
 {
-	write(fd, &c, 1);
+	int fd = open("test.txt");
+	printf("%s", read());
 }

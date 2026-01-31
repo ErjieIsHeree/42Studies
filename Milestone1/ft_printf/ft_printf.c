@@ -6,35 +6,60 @@
 /*   By: exia <exia@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 15:57:04 by exia              #+#    #+#             */
-/*   Updated: 2026/01/25 20:28:20 by exia             ###   ########.fr       */
+/*   Updated: 2026/01/31 18:43:06 by exia             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-int	ft_printf(char const *param, ...)
+static void	write_conversion(va_list ap, const char rule, int *w_size)
 {
-	va_list	ap;
-	int		i;
-	size_t	len;
-
-	if (!param)
-		return (-1);
-	va_start(ap, param);
-	i = 0;
-	len = ft_strlen(param);
-	while (param[i] && len--)
+	if (rule == 'c')
+		putchr(va_arg(ap, int), w_size);
+	else if (rule == 's')
+		putstr(va_arg(ap, char *), w_size);
+	else if (rule == 'p')
+		putptr_hexa(va_arg(ap, void *), w_size);
+	else if (rule == 'd' || rule == 'i')
+		putnbr(va_arg(ap, int), DEC, w_size);
+	else if (rule == 'u')
+		putnbr_base(va_arg(ap, unsigned int), DEC, w_size);
+	else if (rule == 'x')
+		putnbr_base(va_arg(ap, unsigned int), HEXA, w_size);
+	else if (rule == 'X')
+		putnbr_base(va_arg(ap, unsigned int), HEXA_UPPER, w_size);
+	else if (rule == '%')
+		putchr('%', w_size);
+	else
 	{
-		if (param[i] == '%')
+		putchr('%', w_size);
+		putchr(rule, w_size);
+	}
+}
+
+int	ft_printf(char const *str, ...)
+{
+	int		w_size;
+	va_list	ap;
+
+	if (!str)
+		return (-1);
+	w_size = 0;
+	va_start(ap, str);
+	while (*str)
+	{
+		if (*str == '%')
 		{
-			if (param[i +1])
-				write_converted(ap, param[i +1]);
-			i++;
-			len--;
+			str++;
+			if (*str)
+				write_conversion(ap, *str, &w_size);
+			else
+				return (-1);
 		}
 		else
-			write(1, &param[i], 1);
-		i++;
+			w_size += write(1, &(*str), 1);
+		str++;
 	}
 	va_end(ap);
+	return (w_size);
 }

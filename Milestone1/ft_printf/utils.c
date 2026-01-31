@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: exia <exia@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/14 15:32:05 by exia              #+#    #+#             */
-/*   Updated: 2026/01/23 17:35:31 by exia             ###   ########.fr       */
+/*   Created: 2026/01/27 10:36:34 by exia              #+#    #+#             */
+/*   Updated: 2026/01/27 15:14:07 by exia             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+int	ft_strlen(char	*str)
 {
-	void	*ptr;
+	int	len;
 
-	if (nmemb == 0 || size == 0)
-		return (malloc(0));
-	if (ULONG_MAX / size < nmemb)
-		return (NULL);
-	ptr = malloc(nmemb * size);
-	if (!ptr)
-		return (NULL);
-	return (ft_memset(ptr, 0, nmemb * size));
+	len = 0;
+	while (*str++)
+		len++;
+	return (len);
 }
