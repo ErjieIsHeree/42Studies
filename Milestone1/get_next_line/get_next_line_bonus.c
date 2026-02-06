@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: exia <exia@student.42madrid.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 10:01:30 by exia              #+#    #+#             */
-/*   Updated: 2026/02/04 14:14:39 by exia             ###   ########.fr       */
+/*   Updated: 2026/02/05 12:38:18 by exia             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	nl_at(const char *str)
 {
@@ -72,24 +72,24 @@ int	init(char **memory, char **buff, int fd)
 
 char	*get_next_line(int fd)
 {
-	static char	*memory = NULL;
+	static char	*memory[1025];
 	char		*buff;
 	int			read_state;
 	char		*t;
 
-	if (!init(&memory, &buff, fd))
+	if (!init(&memory[fd], &buff, fd))
 		return (NULL);
-	while (nl_at(memory) == -1)
+	while (nl_at(memory[fd]) == -1)
 	{
 		read_state = read(fd, buff, BUFFER_SIZE);
-		if (read_state == -1 || (!*memory && !*buff && read_state == 0))
-			return (free(memory), free(buff), NULL);
-		t = memory;
-		memory = strjoin(memory, buff, read_state);
+		if (read_state == -1 || (!*memory[fd] && !*buff && read_state == 0))
+			return (free(memory[fd]), free(buff), NULL);
+		t = memory[fd];
+		memory[fd] = strjoin(memory[fd], buff, read_state);
 		free(t);
 		if (read_state == 0)
-			return (free(buff), str_next(memory));
+			return (free(buff), str_next(memory[fd]));
 	}
 	free(buff);
-	return (str_next(memory));
+	return (str_next(memory[fd]));
 }

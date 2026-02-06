@@ -21,15 +21,12 @@
 # include <stdarg.h>
 # include <unistd.h>
 
-//* Utils
 int		ft_strlen(char	*str);
-
-//* Chore
 int		ft_printf(char const *a, ...);
 void	putchr(char c, int *w_size);
 void	putstr(char *str, int *w_size);
 void	putnbr(int nbr, char *base, int *w_size);
-void	putnbr_base(unsigned int nbr, char *base, int *w_size);
+void	putnbr_base(unsigned long nbr, char *base, int *w_size);
 void	putptr_hexa(void *ptr, int *w_size);
 
 #endif

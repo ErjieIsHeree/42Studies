@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: exia <exia@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: smarin-s <smarin-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/31 14:36:04 by exia              #+#    #+#             */
-/*   Updated: 2026/01/31 20:29:28 by exia             ###   ########.fr       */
+/*   Created: 2026/01/22 21:45:43 by smarin-s          #+#    #+#             */
+/*   Updated: 2026/02/06 17:37:21 by smarin-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <stdlib.h>
+#include "push_swap.h"
 
-int	main(void)
+t_list	*ft_lstnew(int value)
 {
-	int fd = open("test.txt");
-	printf("%s", read());
+	t_list	*lst;
+
+	lst = malloc(sizeof(t_list));
+	if (!lst)
+		return (NULL);
+	lst->value = value;
+	lst->next = NULL;
+	return (lst);
 }
