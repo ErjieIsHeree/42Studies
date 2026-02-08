@@ -12,21 +12,33 @@
 
 #include "../../includes/push_swap.h"
 
-void	simple(struct s_bench *bench, t_list *stack_a)
-{
-	t_list	*temp;
 
-	while (stack_a)
+void	mini_bubble(struct s_bench *bench, t_list **stack_a, t_list **stack_b)
+{
+	if ()
+}
+
+/**
+ * This function is an adaptation of the "selection sort" algorithm to this
+ * push_swap function.
+ * 
+ * The original function brings to the start of the stack the smallest
+ */
+void	simple(struct s_bench *bench, t_list *stack_a, t_list *stack_b)
+{
+	while (check(stack_a))
 	{
-		temp = stack_a->next;
-		while (stack_a->prev->value)
-		{
-			sa(&stack_a->prev);
-		}
-		stack_a = temp;
+		while (stack_a)
+			if (stack_a->next)
+				mini_bubble(bench, &stack_a, &stack_b);
+			else
+				pb()
+		while (stack_b)
+			bubble_sort_b(bench, &stack_a, &stack_b);
 	}
 }
 
+/*
 void	medium(struct s_bench *bench, t_list *stack_a)
 {
 	
@@ -41,3 +53,4 @@ void	adaptative(struct s_bench *bench, t_list *stack_a)
 {
 	
 }
+*/

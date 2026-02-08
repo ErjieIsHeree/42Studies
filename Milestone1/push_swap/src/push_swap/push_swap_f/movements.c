@@ -12,35 +12,44 @@
 
 #include "../../../includes/push_swap.h"
 
+// modified
 void	swap(t_list **lst)
 {
 	t_list	*temp;
 
+	if (!lst)
+		return ;
 	if (!(*lst) || !(*lst)->next)
 		return ;
 	temp = (*lst);
 	(*lst) = (*lst)->next;
-	(temp)->next = (*lst)->next;
+	temp->next = (*lst)->next;
 	(*lst)->next = temp;
 }
 
-void	push(t_list **a, t_list **b)
+// modified
+void	push(t_list **dest, t_list **src)
 {
 	t_list	*temp;
 
-	if (!(*a) || !(*b))
+	if (!dest || !src)
 		return ;
-	temp = (*b)->next;
-	(*b)->next = *a;
-	*a = *b;
-	*b = temp;
+	if (!(*dest) || !(*src))
+		return ;
+	temp = (*src)->next;
+	(*src)->next = *dest;
+	*dest = *src;
+	*src = temp;
 }
 
+// modified
 void	rotate(t_list **lst)
 {
 	t_list	*tmp;
 	t_list	*first;
 
+	if (!lst)
+		return ;
 	if (!(*lst) || !(*lst)->next)
 		return ;
 	first = *lst;
@@ -52,15 +61,18 @@ void	rotate(t_list **lst)
 	first->next = NULL;
 }
 
+// modified
 void	reverse_rotate(t_list **lst)
 {
 	t_list	*last;
 	t_list	*prev;
 
+	if (!lst)
+		return ;
 	if (!(*lst) || !(*lst)->next)
 		return ;
 	last = *lst;
-	while ((last->next))
+	while (last->next)
 	{
 		prev = last;
 		last = last->next;
