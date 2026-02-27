@@ -11,13 +11,11 @@
 #                                                                             #
 # ########################################################################### #
 
-def __recursive_print_day(days: int) -> None:
-    if days != 1:
-        __recursive_print_day(days - 1)
-    print(f"Day {days}")
-
-
-def ft_count_harvest_recursive() -> None:
-    print("Days until harvest: ", end="")
-    __recursive_print_day(int(input()))
-    print("Harvest time!")
+def ft_count_harvest_recursive(i=1, day=None) -> None:
+    if day is None:
+        day = int(input("Days until harvest: "))
+    if i <= day:
+        print(f"Day {i}")
+        ft_count_harvest_recursive(i + 1, day)
+    else:
+        print("Harvest time!")

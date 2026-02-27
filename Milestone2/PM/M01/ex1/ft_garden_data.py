@@ -15,7 +15,7 @@ class Plant():
     """A blueprint for creating a plant"""
 
     def __init__(self, name: str, height: int, age: int) -> None:
-        """Use this function to remake the plant"""
+        """The class plant instance an object Plant"""
         self.name = name
         self.height = height
         self.age = age
