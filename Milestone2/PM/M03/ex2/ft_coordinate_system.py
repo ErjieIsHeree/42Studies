@@ -1,11 +1,9 @@
 
 import math
-import sys
 
 point_zero: tuple = (0, 0, 0)
 coordinates: tuple = (10, 20, 5)
 distance: float
-argc: int = len(sys.argv)
 
 
 def calculate_distance() -> float:
@@ -17,40 +15,60 @@ def calculate_distance() -> float:
 def print_solution() -> None:
     distance = calculate_distance()
     print(f"Position created: {coordinates}")
-    print(f"Distance between {point_zero} and {coordinates}: {distance}\n")
+    print(f"Distance between {point_zero} and {coordinates}: {distance:.2f}\n")
+    pass
 
 
-if argc == 1:
-    print("=== Game Coordinate System ===\n")
-    print_solution()
-elif argc == 2:
-    print("=== Game Coordinate System ===\n")
-    arg: str = sys.argv[1]
-    number: str = ""
-    coordinates = ()
-    parseable: bool = True
-    coordinate_qty: int = 0
+def demostration_unpack() -> None:
+    print("Unpacking demonstration:")
+    x, y, z = coordinates
+    print(f"Player at x={x}, y={y}, z={z}")
+    print(f"Coordinates: X={x}, Y={y}, Z={z}")
+    pass
 
-    try:
-        for c in arg:
-            if c != ',':
-                number += c
-            else:
-                coordinates = coordinates + tuple([int(number)])
-                number = ""
-        coordinates = coordinates + tuple([int(number)])
-        for i in coordinates:
-            coordinate_qty += 1
-        if coordinate_qty != 3:
-            raise Exception
-    except ValueError as err:
-        print(f"Parsing invalid coordinates: \"{arg}\"")
-        print(f"Error parsing coordinates: {err}")
-        print(f"Error details - Type: {err.__str__}, Args: ({err})")
-    except Exception:
-        print("Dude, just enter 3 correct numbers between commas")
+
+print("=== Game Coordinate System ===\n")
+print_solution()
+
+arg: str = "3,4,0"
+number: str = ""
+coordinates = ()
+coordinate_qty: int = 0
+
+print(f"Parsing coordinates: \"{arg}\"")
+for c in arg:
+    if c != ',':
+        number += c
     else:
-        print(f"Parsing coordinates: \"{arg}\"")
-        print_solution()
-else:
-    print("Subject didn't show any solution to more than 1 argument.")
+        coordinates = coordinates + tuple([int(number)])
+        number = ""
+coordinates = coordinates + tuple([int(number)])
+print_solution()
+
+number = ""
+arg = "abc,def,ghi"
+print(f"Parsing invalid coordinates: \"{arg}\"")
+try:
+    for c in arg:
+        if c != ',':
+            number += c
+        else:
+            coordinates = coordinates + tuple([int(number)])
+            number = ""
+    coordinates = coordinates + tuple([int(number)])
+    for i in coordinates:
+        coordinate_qty += 1
+    if coordinate_qty != 3:
+        raise ValueError("Coordinates have 3 values: x, y, z")
+except ValueError as err:
+    print(f"Error parsing coordinates: {err}")
+    print(f"Error details - Type: {err.__class__.__name__}, Args: (", end="")
+    for arg in err.args:
+        print(f"\"{arg}\",", end="")
+    print(")")
+except Exception:
+    print("Dude, just enter 3 correct numbers between commas")
+print()
+
+coordinates = (3, 4, 0)
+demostration_unpack()
