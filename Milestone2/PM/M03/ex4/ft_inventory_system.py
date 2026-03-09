@@ -1,6 +1,5 @@
 
 import sys
-# dict(), len(), print(), keys(), values(), items(), get(), update()
 
 
 class InvalidInputException(Exception):
