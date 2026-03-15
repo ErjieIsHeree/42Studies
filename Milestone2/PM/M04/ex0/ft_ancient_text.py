@@ -1,6 +1,6 @@
 print("=== CYBER ARCHIVES - DATA RECOVERY SYSTEM ===")
 
-print("Accessing Storage Vault: ancient_fragment.txt")
+print("\nAccessing Storage Vault: ancient_fragment.txt")
 try:
     file = open("ancient_fragment.txt", "r")
     print("Connection established...")
@@ -9,6 +9,6 @@ try:
     print(file.read())
 
     file.close()
-    print("Data recovery complete. Storage unit disconnected.")
-except FileNotFoundError:
-    print("ERROR: Storage vault not found.")
+    print("\nData recovery complete. Storage unit disconnected.")
+except Exception as err:
+    print(f"[ERROR]: {err}")
