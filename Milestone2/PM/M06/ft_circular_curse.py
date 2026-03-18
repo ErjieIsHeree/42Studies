@@ -1,4 +1,4 @@
-from    alchemy.grimoire import validate_ingredients, record_spell
+from alchemy.grimoire import validate_ingredients, record_spell
 
 print(f"""== Circular Curse Breaking ===
 
