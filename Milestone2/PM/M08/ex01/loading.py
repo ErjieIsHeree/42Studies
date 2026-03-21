@@ -42,7 +42,7 @@ except Exception as err:
 
 
 def generate_visualization(texts: list[str]) -> None:
-    import matplotlib.pyplot as plt
+    from matplotlib import pyplot as plt
 
     fig, ax = plt.subplots(figsize=(2, len(texts) * 0.4))
     ax.axis("off")
@@ -51,12 +51,11 @@ def generate_visualization(texts: list[str]) -> None:
         ax.text(0, 1 - i * 0.05, f"• {data}", transform=ax.transAxes,
                 fontsize=9, verticalalignment="top", wrap=True)
 
-    plt.savefig("analysis.png", bbox_inches="tight")
+    plt.savefig("matrix_analysis.png", bbox_inches="tight")
     pass
 
 
 if all_modules_installed:
-    import requests as rq
     cats_facts = rq.get("https://meowfacts.herokuapp.com/?count=91")
 
     print("\nAnalyzing Matrix data...")
@@ -65,6 +64,6 @@ if all_modules_installed:
     generate_visualization([data for data in cats_facts.json()["data"]])
 
     print("""\nAnalysis complete!
-Results saved to: matrix\\analysis.png}""")
+Results saved to: matrix_analysis.png}""")
 else:
     print("\nExercise can not be done.")
