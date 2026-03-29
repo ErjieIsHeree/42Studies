@@ -71,9 +71,11 @@ class SensorStream(DataStream):
             case "High-priority":
                 if (self.temp < 15 or self.temp > 40) and self.temp != 0:
                     filtered_data.append({"Temperature": self.temp})
-                if (self.humidity < 30 or self.humidity > 60) and self.humidity != 0:
+                if ((self.humidity < 30 or self.humidity > 60) and
+                   self.humidity != 0):
                     filtered_data.append({"Humidity": self.humidity})
-                if self.pressure < 980 or self.pressure > 1040 and self.pressure != 0:
+                if (self.pressure < 980 or self.pressure > 1040 and
+                   self.pressure) != 0:
                     filtered_data.append({"Pressure": self.pressure})
             case _:
                 filtered_data = data_batch
@@ -269,4 +271,5 @@ for i, (data, processor) in enumerate(zip(datas, stream_processor)):
             large_transactions = processor.filter_data(data)
         case _:
             pass
-print(f"Filtered results: {len(sensor_alerts)} critical sensor alerts, {len(large_transactions)} large transaction")
+print(f"Filtered results: {len(sensor_alerts)} critical sensor alerts, "
+      f"{len(large_transactions)} large transaction")

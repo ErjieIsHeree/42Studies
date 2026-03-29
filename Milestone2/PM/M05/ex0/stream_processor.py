@@ -123,13 +123,13 @@ log_processor.validate(log)
 print("Validation: Log entry verified")
 print(log_processor.format_output(log_processor.process(log)))
 
-processors = [
+processors: list[DataProcessor] = [
     NumericProcessor(),
     TextProcessor(),
     LogProcessor()
 ]
 
-info = [
+info: list = [
     [1, 2, 3],
     "Hello Nexusss",
     "INFO: System ready"
