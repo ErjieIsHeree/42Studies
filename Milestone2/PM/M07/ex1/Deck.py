@@ -38,7 +38,7 @@ class Deck():
             "artifacts": len(
                 [card for card in self.cards if isinstance(card, ArtifactCard)]
             ),
-            "avg_cost": round((sum([card.cost for card in self.cards]) / 
+            "avg_cost": round((sum([card.cost for card in self.cards]) /
                                len(self.cards)), 1)
         }
 
