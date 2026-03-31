@@ -8,7 +8,8 @@ print(f"""=== DataDeck Card Foundation ===
 Testing Abstract Base Class Design:
 
 CreatureCard Info:
-{fire_dragon.get_card_info()}
+{'name': 'Fire Dragon', 'cost': 5, 'rarity': 'Legendary',
+'type': 'Creature', 'attack': 7, 'health': 5}
 
 Playing Fire Dragon with 6 mana available:
 Playable: {fire_dragon.is_playable(6)}
