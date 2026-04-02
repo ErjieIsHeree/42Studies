@@ -1,5 +1,4 @@
-from abc import ABC
-from abc import abstractmethod
+from abc import ABC, abstractmethod
 from typing import Any
 import re
 
@@ -57,7 +56,7 @@ class TextProcessor(DataProcessor):
         return f"{len(words)}-{length}"
 
     def validate(self, data: Any) -> bool:
-        return not isinstance(data, str)
+        return isinstance(data, str)
 
     def format_output(self, result: str) -> str:
         if re.match(r"^\d+-\d+$", result) is None:

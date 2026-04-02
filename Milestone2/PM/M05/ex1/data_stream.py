@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Any, Optional, List, Dict, Union, Generator
 
 
-def write_coma(data_batch: List[str]) -> Generator[str]:
+def write_coma(data_batch: List[str]) -> Generator[str, None, None]:
     yield data_batch[0]
     for i in range(1, len(data_batch)):
         yield f", {data_batch[i]}"
