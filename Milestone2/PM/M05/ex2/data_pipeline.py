@@ -1,5 +1,5 @@
 import typing
-from typing import Any
+from typing import Any, Protocol
 from abc import ABC, abstractmethod
 
 
@@ -17,7 +17,6 @@ class DataProcessor(ABC):
 
     def output(self) -> tuple[int, str]:
         return self.ingest_l.pop(0)
-
     pass
 
 
@@ -94,6 +93,37 @@ class LogProcessor(DataProcessor):
     pass
 
 
+class ExportPlugin(Protocol):
+    def process_output(self, data: list[tuple[int, str]]) -> None: ...
+    pass
+
+
+class CSVExportPlugin():
+    def process_output(self, data: list[tuple[int, str]]) -> None:
+        print("CSV Output:")
+        csv_format: str = ""
+        for dat in data:
+            csv_format += f"{dat[1]},"
+            pass
+        print(csv_format[:-1])
+        return
+    pass
+
+
+class JSONExportPlugin():
+    def process_output(self, data: list[tuple[int, str]]) -> None:
+        print("JSON Output:")
+        json_format: str = "{"
+        for dat in data:
+            json_format += f"\"item_{dat[0]}\": \"{dat[1]}\","
+            pass
+        json_format = json_format[:-1]
+        json_format += "}"
+        print(json_format)
+        return
+    pass
+
+
 class DataStream():
     def __init__(self) -> None:
         self.numeric_proc: NumericProcessor | None = None
@@ -147,25 +177,47 @@ class DataStream():
                   "essor")
             pass
         return
+
+    def output_pipeline(self, nb: int, plugin: ExportPlugin) -> None:
+        outputs: list[Any] = []
+        if self.numeric_proc:
+            for i in range(min(nb, len(self.numeric_proc.ingest_l))):
+                outputs += [self.numeric_proc.output()]
+            plugin.process_output(outputs)
+            pass
+        outputs = []
+        if self.text_proc:
+            for i in range(min(nb, len(self.text_proc.ingest_l))):
+                outputs += [self.text_proc.output()]
+            plugin.process_output(outputs)
+            pass
+        outputs = []
+        if self.log_proc:
+            for i in range(min(nb, len(self.log_proc.ingest_l))):
+                outputs += [self.log_proc.output()]
+            plugin.process_output(outputs)
+            pass
+        return
     pass
 
 
-print("=== Code Nexus - Data Stream ===\n")
+print("=== Code Nexus - Data Pipeline ===\n")
 
-
-print("Initialize Data Stream...")
+print("Initialize Data Stream...\n")
 data_stream: DataStream = DataStream()
 
 print("== DataStream statistics ==")
 data_stream.print_processors_stats()
 
-print("\nRegistering Numeric Processor\n")
+print("\nRegistering Processors\n")
 data_stream.register_processor(NumericProcessor())
+data_stream.register_processor(TextProcessor())
+data_stream.register_processor(LogProcessor())
 
 print("Send first batch of data on stream: ['Hello world', [3.14, -1, 2.71], ["
       "{'log_level': 'WARNING', 'log_message': 'Telnet access! Use ssh instead"
       "'}, {'log_level': 'INFO', 'log_message': 'User wil is connected'}], 42,"
-      " ['Hi', 'five']]")
+      " ['Hi', 'five']]\n")
 data_stream.process_stream([
     'Hello world',
     [3.14, -1, 2.71],
@@ -174,35 +226,34 @@ data_stream.process_stream([
     42,
     ['Hi', 'five']
 ])
+
 print("== DataStream statistics ==")
 data_stream.print_processors_stats()
 
-print("\nRegistering other data processors")
-data_stream.register_processor(TextProcessor())
-data_stream.register_processor(LogProcessor())
+print("\nSend 3 processed data from each processor to a CSV plugin:")
+data_stream.output_pipeline(3, CSVExportPlugin())
 
-print("Send the same batch again")
+print("\n== DataStream statistics ==")
+data_stream.print_processors_stats()
+
+print("\nSend another batch of data: [21, ['I love AI', 'LLMs are wonderful', 'S"
+      "tay healthy'], [{'log_level': 'ERROR', 'log_message': '500 server crash"
+      "'}, {'log_level': 'NOTICE', 'log_message': 'Certificate expires in 10 d"
+      "ays'}], [32, 42, 64, 84, 128, 168], 'World hello']")
 data_stream.process_stream([
-    'Hello world',
-    [3.14, -1, 2.71],
-    [{'log_level': 'WARNING', 'log_message': 'Telnet access! Use ssh instead'},
-     {'log_level': 'INFO', 'log_message': 'User wil is connected'}],
-    42,
-    ['Hi', 'five']
+    21,
+    ['I love AI', 'LLMs are wonderful', 'Stay healthy'],
+    [{'log_level': 'ERROR', 'log_message': '500 server crash'},
+     {'log_level': 'NOTICE', 'log_message': 'Certificate expires in 10 days'}],
+    [32, 42, 64, 84, 128, 168],
+    'World hello'
 ])
-print("== DataStream statistics ==")
+
+print("\n== DataStream statistics ==")
 data_stream.print_processors_stats()
 
-print("\nConsume some elements from the data processors: Numeric 3, Text 2, Lo"
-      "g 1")
-if data_stream.numeric_proc:
-    data_stream.numeric_proc.output()
-    data_stream.numeric_proc.output()
-    data_stream.numeric_proc.output()
-if data_stream.text_proc:
-    data_stream.text_proc.output()
-    data_stream.text_proc.output()
-if data_stream.log_proc:
-    data_stream.log_proc.output()
-print("== DataStream statistics ==")
+print("\nSend 5 processed data from each processor to a JSON plugin:")
+data_stream.output_pipeline(5, JSONExportPlugin())
+
+print("\n== DataStream statistics ==")
 data_stream.print_processors_stats()
