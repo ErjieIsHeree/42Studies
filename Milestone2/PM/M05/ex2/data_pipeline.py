@@ -236,10 +236,10 @@ data_stream.output_pipeline(3, CSVExportPlugin())
 print("\n== DataStream statistics ==")
 data_stream.print_processors_stats()
 
-print("\nSend another batch of data: [21, ['I love AI', 'LLMs are wonderful', 'S"
-      "tay healthy'], [{'log_level': 'ERROR', 'log_message': '500 server crash"
-      "'}, {'log_level': 'NOTICE', 'log_message': 'Certificate expires in 10 d"
-      "ays'}], [32, 42, 64, 84, 128, 168], 'World hello']")
+print("\nSend another batch of data: [21, ['I love AI', 'LLMs are wonderful', "
+      "'Stay healthy'], [{'log_level': 'ERROR', 'log_message': '500 server cra"
+      "sh'}, {'log_level': 'NOTICE', 'log_message': 'Certificate expires in 10"
+      " days'}], [32, 42, 64, 84, 128, 168], 'World hello']")
 data_stream.process_stream([
     21,
     ['I love AI', 'LLMs are wonderful', 'Stay healthy'],
