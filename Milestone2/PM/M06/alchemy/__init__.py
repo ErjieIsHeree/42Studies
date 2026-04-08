@@ -1,9 +1,11 @@
-from alchemy.elements import create_air
-from alchemy.potions import strength_potion
-from alchemy.potions import healing_potion as heal
-from alchemy.transmutation.recipes import lead_to_gold
+from .elements import create_air
+from .potions import healing_potion as heal
+from .potions import strength_potion
+from .transmutation.recipes import lead_to_gold
 
-create_air
-strength_potion
-heal
-lead_to_gold
+__all__: list[str] = [
+    "create_air",
+    "heal",
+    "strength_potion",
+    "lead_to_gold"
+]
