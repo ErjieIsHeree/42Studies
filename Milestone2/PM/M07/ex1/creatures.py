@@ -51,7 +51,7 @@ class Shiftling(Creature, TransformCapability):
 class Morphagon(Creature, TransformCapability):
     def __init__(self) -> None:
         super().__init__("Morphagon", "Normal/Dragon")
-        self.shapeshifted: bool = False
+        self.shapeshifted = False
         return
 
     def attack(self) -> str:
