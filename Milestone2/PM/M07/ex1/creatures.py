@@ -61,8 +61,10 @@ class Morphagon(Creature, TransformCapability):
             return "Morphagon attacks normally."
 
     def transform(self) -> str:
+        self.shapeshifted: bool = True
         return "Morphagon morphs into a dragonic battle form!"
 
     def revert(self) -> str:
+        self.shapeshifted: bool = False
         return "Morphagon stabilizes its form."
     pass
