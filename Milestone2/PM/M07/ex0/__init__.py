@@ -1,4 +1,9 @@
-from .factories import AquaFactory, FlameFactory
+from .factories import (
+    AquaFactory,
+    FlameFactory
+)
 
-AquaFactory()
-FlameFactory()
+__all__: list[str] = [
+    "AquaFactory",
+    "FlameFactory"
+]

@@ -1,4 +1,9 @@
-from .factories import HealingCreatureFactory, TransformCreatureFactory
+from .factories import (
+    HealingCreatureFactory,
+    TransformCreatureFactory
+)
 
-HealingCreatureFactory()
-TransformCreatureFactory()
+__all__: list[str] = [
+    "HealingCreatureFactory",
+    "TransformCreatureFactory"
+]
