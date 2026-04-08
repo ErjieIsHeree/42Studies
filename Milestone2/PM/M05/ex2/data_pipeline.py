@@ -1,18 +1,18 @@
 import typing
-from typing import Any, Protocol
-from abc import ABC, abstractmethod
+from typing import Any
+import abc
 
 
-class DataProcessor(ABC):
+class DataProcessor(abc.ABC):
     def __init__(self) -> None:
         self.oldest: int = -1
         self.ingest_l: list[tuple[int, str]] = []
         return
 
-    @abstractmethod
+    @abc.abstractmethod
     def validate(self, data: Any) -> bool: ...
 
-    @abstractmethod
+    @abc.abstractmethod
     def ingest(self, data: Any) -> None: ...
 
     def output(self) -> tuple[int, str]:
@@ -93,7 +93,7 @@ class LogProcessor(DataProcessor):
     pass
 
 
-class ExportPlugin(Protocol):
+class ExportPlugin(typing.Protocol):
     def process_output(self, data: list[tuple[int, str]]) -> None: ...
     pass
 
