@@ -1,7 +1,9 @@
-from .elements import create_air
-from .potions import strength_potion
-from .potions import healing_potion as heal
+from alchemy.elements import create_air
+from alchemy.potions import strength_potion
+from alchemy.potions import healing_potion as heal
+from alchemy.transmutation.recipes import lead_to_gold
 
 create_air
 strength_potion
 heal
+lead_to_gold
