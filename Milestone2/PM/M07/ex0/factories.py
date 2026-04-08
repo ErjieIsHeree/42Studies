@@ -1,21 +1,20 @@
 from .abs_creature_factory import CreatureFactory
-from .abs_creature import Creature
 from .creatures import Flameling, Pyrodon, Aquabub, Torragon
 
 
 class FlameFactory(CreatureFactory):
-    def create_base(self) -> Creature:
+    def create_base(self) -> Flameling:
         return Flameling()
 
-    def create_evolved(self) -> Creature:
+    def create_evolved(self) -> Pyrodon:
         return Pyrodon()
     pass
 
 
 class AquaFactory(CreatureFactory):
-    def create_base(self) -> Creature:
+    def create_base(self) -> Aquabub:
         return Aquabub()
 
-    def create_evolved(self) -> Creature:
+    def create_evolved(self) -> Torragon:
         return Torragon()
     pass
