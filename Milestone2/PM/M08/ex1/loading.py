@@ -79,4 +79,14 @@ Results saved to: matrix_analysis.png}""")
 else:
     print("""\nExercise can not be done.
 
-Try """)
+Try installing the packages using:
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requierements.txt
+
+or you can use poetry:
+poetry install
+source $(poetry env activate) or poetry run python3 the_script.py
+
+Make sure to delete the venv or the poetry env:
+rm -r venv or poetry env remove python""")
