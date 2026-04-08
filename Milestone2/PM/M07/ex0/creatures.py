@@ -1,4 +1,4 @@
-from .abstract_creature import Creature
+from .abs_creature import Creature
 
 
 class Flameling(Creature):

@@ -1,5 +1,5 @@
 import abc
-from .abstract_creature import Creature
+from .abs_creature import Creature
 
 
 class CreatureFactory(abc.ABC):

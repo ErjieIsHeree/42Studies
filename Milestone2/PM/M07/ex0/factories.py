@@ -1,5 +1,5 @@
-from .abstract_creature_factory import CreatureFactory
-from .abstract_creature import Creature
+from .abs_creature_factory import CreatureFactory
+from .abs_creature import Creature
 from .creatures import Flameling, Pyrodon, Aquabub, Torragon
 
 
