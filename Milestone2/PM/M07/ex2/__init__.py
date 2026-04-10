@@ -1,9 +1,9 @@
 from .battel_strats import (
-    BattleStrategy,
     NormalStrategy,
     AggressiveStrategy,
     DefensiveStrategy
 )
+from .abs_battel_strat import BattleStrategy
 
 __all__: list[str] = [
     "BattleStrategy",

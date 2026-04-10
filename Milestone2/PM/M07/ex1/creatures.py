@@ -1,10 +1,11 @@
 from .abs_capabilities import HealCapability, TransformCapability
-from ex0.creatures import Creature
+from ex0.abs_creature import Creature
 
 
 class Sproutling(Creature, HealCapability):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__("Sproutling", "Grass")
+        return
 
     def attack(self) -> str:
         return "Sproutling uses Vine Whip!"
@@ -15,8 +16,9 @@ class Sproutling(Creature, HealCapability):
 
 
 class Bloomelle(Creature, HealCapability):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__("Bloomelle", "Grass/Fairy")
+        return
 
     def attack(self) -> str:
         return "Bloomelle uses Petal Dance!"
