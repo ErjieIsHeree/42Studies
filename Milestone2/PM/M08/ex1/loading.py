@@ -52,27 +52,50 @@ except Exception as err:
     all_modules_installed = False
 
 
-def generate_visualization(texts: list[str]) -> None:
-    from matplotlib import pyplot as plt
+def generate_visualization() -> None:
+    import numpy as np
+    import pandas as pd
+    import matplotlib.pyplot as plt
+    # --- Datos generados ---
+    rng = np.random.default_rng(42)
+    creatures = ["Sproutling", "Bloomelle", "Shiftling", "Morphagon"]
+    stats = {
+        "creature": creatures,
+        "hp":      rng.integers(40, 100, size=4),
+        "attack":  rng.integers(30, 90,  size=4),
+        "defense": rng.integers(20, 80,  size=4),
+        "speed":   rng.integers(10, 70,  size=4),
+    }
 
-    fig, ax = plt.subplots(figsize=(2, len(texts) * 0.4))
-    ax.axis("off")
+    # --- Pandas: organizar ---
+    df = pd.DataFrame(stats).set_index("creature")
+    df["total"] = df.sum(axis=1)
+    df = df.sort_values("total", ascending=False)
+    print(df.to_string())
 
-    for i, data in enumerate(texts):
-        ax.text(0, 1 - i * 0.05, f"• {data}", transform=ax.transAxes,
-                fontsize=9, verticalalignment="top", wrap=True)
+    # --- Matplotlib: visualizar ---
+    cols = ["hp", "attack", "defense", "speed"]
+    x = np.arange(len(df))
+    width = 0.2
 
-    plt.savefig("matrix_analysis.png", bbox_inches="tight")
-    pass
+    fig, ax = plt.subplots(figsize=(9, 5))
+    for i, col in enumerate(cols):
+        ax.bar(x + i * width, df[col], width, label=col.capitalize())
+
+    ax.set_xticks(x + width * 1.5)
+    ax.set_xticklabels(df.index)
+    ax.set_ylabel("Stat value")
+    ax.set_title("Creature Stats Comparison")
+    ax.legend()
+    plt.tight_layout()
+    plt.show()
 
 
 if all_modules_installed:
-    cats_facts = rq.get("https://meowfacts.herokuapp.com/?count=91")
-
     print("\nAnalyzing Matrix data...")
     print("Processing 1000 data points...")
     print("Generating visualization...")
-    generate_visualization([data for data in cats_facts.json()["data"]])
+    generate_visualization()
 
     print("""\nAnalysis complete!
 Results saved to: matrix_analysis.png}""")
