@@ -1,7 +1,7 @@
 from enum import Enum
 from pydantic import BaseModel, Field, model_validator
 from datetime import datetime
-from typing_extensions import Self
+from typing import Self
 
 
 class ContactType(Enum):
@@ -25,10 +25,9 @@ class AlienContact(BaseModel):
 
     @model_validator(mode='after')
     def check_contact_id(self) -> Self:
-        if (len(self.contact_id) < 2 or self.contact_id[0] != "A" or
-           self.contact_id[1] != "C"):
-            raise Exception("Contact ID must start with \"AC\" "
-                            "(Alien Contact)")
+        if not ("AC" in self.contact_id):
+            raise Exception("Contact ID must start with \"AC\" (Alien Contact"
+                            ")")
         return self
 
     @model_validator(mode='after')
@@ -46,7 +45,7 @@ class AlienContact(BaseModel):
 
     @model_validator(mode='after')
     def check_strong_signal(self) -> Self:
-        if self.signal_strength > 7.0 and self.message_received == "":
+        if self.signal_strength > 7.0 and not self.message_received:
             raise Exception("Strong signals (> 7.0) should include received "
                             "messages")
         return self

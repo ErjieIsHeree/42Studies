@@ -1,7 +1,7 @@
 from enum import Enum
 from pydantic import BaseModel, Field, model_validator
 from datetime import datetime
-from typing_extensions import Self
+from typing import Self
 
 
 class Rank(Enum):
@@ -36,27 +36,25 @@ class SpaceMission(BaseModel):
 
     @model_validator(mode="after")
     def check_mission_id(self) -> Self:
-        if len(self.mission_id) < 1 or self.mission_id[0] != "M":
+        if not ("M" in self.mission_id):
             raise Exception("Mission ID must start with \"M\"")
         return self
 
     @model_validator(mode="after")
     def check_high_rank(self) -> Self:
-        has_high_rank = False
-        for member in self.crew:
-            if member.rank == Rank.CAPTAIN or member.rank == Rank.COMMANDER:
-                has_high_rank = True
-        if not has_high_rank:
+        if not any(member.rank in (Rank.CAPTAIN, Rank.COMMANDER)
+                   for member in self.crew):
             raise Exception("Must have at least one Commander or Captain")
         return self
 
     @model_validator(mode="after")
     def check_appropriate_crew(self) -> Self:
         if self.duration_days > 365:
-            for member in self.crew:
-                if member.years_experience < 5:
-                    raise Exception("Long missions (> 365 days) need 50% "
-                                    "experienced crew (5+ years)")
+            experienced = sum(member.years_experience < 5
+                              for member in self.crew)
+            if experienced < len(self.crew) / 2:
+                raise Exception("Long missions (> 365 days) need 50% experienc"
+                                "ed crew (5+ years)")
         return self
 
     @model_validator(mode="after")
@@ -116,7 +114,8 @@ Duration: {space_mission.duration_days}
 Budget: ${space_mission.budget_millions}M
 Crew size: {len([member for member in space_mission.crew])}
 Crew members:""")
-[print(f"- {member.name} ({member.rank.name.lower()}) - {member.specialization}")
+[print(f"- {member.name} ({member.rank.name.lower()}) "
+       f"- {member.specialization}")
  for member in space_mission.crew]
 
 try:
