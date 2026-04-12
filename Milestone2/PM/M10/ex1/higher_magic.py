@@ -1,4 +1,4 @@
-from typing import Callable
+from collections.abc import Callable
 
 
 test_values = [18, 17, 8]
