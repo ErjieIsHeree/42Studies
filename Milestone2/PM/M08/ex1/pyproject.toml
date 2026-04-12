@@ -1,17 +1,14 @@
-[project]
-name = "ex01"
-version = "0.1.0"
-requires-python = ">=3.14"
-
 [tool.poetry]
-package-mode = false
+name = "ex1"
+version = "1.0.0"
+description = "Hello, world!"
+authors = ["ErjieIsHeree <erjieisheree@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = ">=3.14"
-pandas = "3.0.1"
-numpy = "2.4.4"
-requests = "2.31.0"
-matplotlib = "3.10.8"
+pandas = "~3.0.1"
+numpy = "~2.4.4"
+requests = "~2.31"
+matplotlib = "~3.10.8"
 
 [build-system]
 requires = ["poetry-core"]
