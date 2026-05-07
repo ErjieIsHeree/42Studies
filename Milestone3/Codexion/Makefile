@@ -6,7 +6,7 @@
 #    By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/03 18:30:11 by erjieishere       #+#    #+#              #
-#    Updated: 2026/05/07 17:32:36 by erjieishere      ###   ########.fr        #
+#    Updated: 2026/05/07 17:52:13 by erjieishere      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,10 @@ $(NAME): $(SRC) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 test: $(TEST_SRC)
-	$(CC) $(TEST_SRC)
+	$(CC) $(TEST_SRC) -o $@
+
+cleant:
+	rm -rf test
 
 all: $(NAME)
 
