@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 10:15:21 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/07 11:39:51 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/07 18:22:06 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ int	error_codex_destroy(t_rules *rules, t_table *table, int init_error)
 	{
 		i = 0;
 		while (i < init_error)
-			pthread_mutex_destroy(&table->dongles[i++]);
+			pthread_mutex_destroy(table->dongles + i++);
 		return (102);
 	}
 	else
 	{
 		i = 0;
 		while (i < rules->number_of_coders)
-			pthread_mutex_destroy(&table->dongles[i++]);
+			pthread_mutex_destroy(&table->dongles + i++);
 		i = 0;
 		while (i < -init_error)
-			pthread_cond_destroy(&table->coder_conds[i++]);
+			pthread_cond_destroy(&table->coder_conds + i++);
 		return (103);
 	}
 }
