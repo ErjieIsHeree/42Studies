@@ -6,15 +6,18 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 18:18:17 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/06 00:02:53 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/07 12:08:27 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CODEXION_PARSER
-#define CODEXION_PARSER
+// !! DELETE COMMENTS BEFORE EVAL
+
+#ifndef RULES
+#define RULES
 
 #include <stdlib.h>
 #include <string.h>
+#include <limits.h>
 
 typedef struct s_rules
 {

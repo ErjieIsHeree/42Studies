@@ -6,7 +6,7 @@
 #    By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/03 18:30:11 by erjieishere       #+#    #+#              #
-#    Updated: 2026/05/07 12:02:27 by erjieishere      ###   ########.fr        #
+#    Updated: 2026/05/07 17:32:36 by erjieishere      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,10 @@ CC := cc
 CFLAGS := -Wall -Wextra -Werror -pthread
 NAME := codexion
 
-SRC := main.c \
-		src/codexion.c src/codex_init.c src/codex_destroy.c \
-		src/rules/get_rules.c src/rules/parse_data.c src/rules/validate_data.c \
-		src/coder/codex.c
+SRC := folder_of_my_choice/main.c \
+		folder_of_my_choice/src/codexion.c folder_of_my_choice/src/codex_init.c folder_of_my_choice/src/codex_destroy.c \
+		folder_of_my_choice/src/rules/get_rules.c folder_of_my_choice/src/rules/parse_data.c folder_of_my_choice/src/rules/validate_data.c \
+		folder_of_my_choice/src/coder/codex.c
 OBJS := $(SRC:.c=.o)
 
 TEST_SRC := ignores/test.c

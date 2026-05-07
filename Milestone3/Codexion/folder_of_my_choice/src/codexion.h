@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   codexion.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/03 18:10:08 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/05 16:59:35 by erjieishere      ###   ########.fr       */
+/*   Created: 2026/05/02 23:33:10 by erjieishere       #+#    #+#             */
+/*   Updated: 2026/05/07 17:54:53 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef CODEXION
+#define CODEXION
 
-#include "codexion.h"
+#include <pthread.h>
 
+#include "rules/rules.h"
+#include "coder/codex.h"
 
-// number_of_coders time_to_burnout time_to_compile time_to_debug
-// time_to_refactor number_of_compiles_required dongle_cooldown scheduler
-int main(int argc, char **argv)
-{
-    return codexion(argc, argv);
-}
+int	codexion(int argc, char **argv);
+int	codex_init(t_rules *rules, t_table *table);
+int	codex_destroy(t_rules *rules, t_table *table, int init_error);
+
+#endif

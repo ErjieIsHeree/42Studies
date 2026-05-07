@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 17:03:08 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/06 00:04:37 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/07 09:52:34 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	validate_data(t_rules *rules)
 {
-	if (rules->number_of_coders < 0)
+	if (rules->number_of_coders < 0 || rules->number_of_coders == INT_MAX)
 		return (-121);
 	else if (rules->time_to_burnout < 0)
 		return (-122);
