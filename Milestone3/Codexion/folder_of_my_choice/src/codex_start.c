@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_rules.c                                        :+:      :+:    :+:   */
+/*   codex_start.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/05 15:32:11 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/09 19:48:40 by erjieishere      ###   ########.fr       */
+/*   Created: 2026/05/08 22:34:16 by erjieishere       #+#    #+#             */
+/*   Updated: 2026/05/09 20:32:53 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rules.h"
+#include "codexion.h"
 
-int	get_rules(int argc, char **argv, t_rules *rules)
+int	codex_start(t_rules *rules, t_table *table)
 {
-	int	error;
+	int	i;
 
-	if (argc != 9)
-		return (301);
-	error = parse_data(argc, argv, rules);
-	if (error != 0)
-		return error;
-	error = validate_data(rules);
-	if (error != 0)
-		return error;
-	return 0;
+	i = 0;
+	while (i < rules->number_of_coders)
+		pthread_join(*(table->coder + i++), NULL);
+	return (0);
 }
 

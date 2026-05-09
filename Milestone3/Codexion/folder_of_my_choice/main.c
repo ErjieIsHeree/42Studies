@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 18:10:08 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/07 17:24:58 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/09 19:52:03 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 int main(int argc, char **argv)
 {
-    return codexion(argc, argv);
+    return (codexion(argc, argv));
 }

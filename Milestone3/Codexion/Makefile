@@ -6,7 +6,7 @@
 #    By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/03 18:30:11 by erjieishere       #+#    #+#              #
-#    Updated: 2026/05/07 17:52:13 by erjieishere      ###   ########.fr        #
+#    Updated: 2026/05/09 19:42:03 by erjieishere      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CFLAGS := -Wall -Wextra -Werror -pthread
 NAME := codexion
 
 SRC := folder_of_my_choice/main.c \
-		folder_of_my_choice/src/codexion.c folder_of_my_choice/src/codex_init.c folder_of_my_choice/src/codex_destroy.c \
+		folder_of_my_choice/src/codexion.c folder_of_my_choice/src/codex_init.c folder_of_my_choice/src/codex_start.c folder_of_my_choice/src/codex_destroy.c \
 		folder_of_my_choice/src/rules/get_rules.c folder_of_my_choice/src/rules/parse_data.c folder_of_my_choice/src/rules/validate_data.c \
 		folder_of_my_choice/src/coder/codex.c
 OBJS := $(SRC:.c=.o)
@@ -45,4 +45,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: test cleant all clean fclean re

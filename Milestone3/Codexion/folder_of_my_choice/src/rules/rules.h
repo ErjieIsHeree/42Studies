@@ -6,14 +6,14 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 18:18:17 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/07 12:08:27 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/09 19:47:53 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// !! DELETE COMMENTS BEFORE EVAL
-
 #ifndef RULES
 #define RULES
+
+#include <stdio.h>
 
 #include <stdlib.h>
 #include <string.h>
