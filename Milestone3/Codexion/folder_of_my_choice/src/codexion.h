@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 23:33:10 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/09 19:40:53 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/11 20:16:20 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,15 @@
 #include "rules/rules.h"
 #include "coder/codex.h"
 
-typedef struct s_table
+typedef struct s_codexion_bench
 {
-	pthread_t		*coder;
-	pthread_mutex_t	*dongle;
-	pthread_cond_t	*dongle_cond;
-}	t_table;
+	t_rules	rules;
+}	t_codexion_bench;
 
 int	codexion(int argc, char **argv);
-int	codex_init(t_rules *rules, t_table *table);
-int	codex_start(t_rules *rules, t_table *table);
-int	codex_destroy(t_rules *rules, t_table *table, int init_error);
+
+int	codex_init(t_codexion_bench *codexion_data);
+int	codex_start(t_codexion_bench *codexion_data);
+int	codex_destroy(t_codexion_bench *codexion_data);
 
 #endif

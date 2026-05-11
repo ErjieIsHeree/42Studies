@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 15:32:11 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/09 19:48:40 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/11 20:23:10 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	get_rules(int argc, char **argv, t_rules *rules)
 	int	error;
 
 	if (argc != 9)
-		return (301);
+		return (51);
 	error = parse_data(argc, argv, rules);
 	if (error != 0)
 		return error;

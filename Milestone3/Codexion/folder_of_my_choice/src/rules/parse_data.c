@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 17:02:55 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/09 20:07:05 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/11 20:23:33 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	parse_data(int argc, char **argv, t_rules *rules)
 	i = 0;
 	while (++i < argc - 1)
 		if (is_invalid_n(argv[i]))
-			return (310 + i);
+			return (60 + i);
 	rules->number_of_coders = atoi(argv[1]);
 	rules->time_to_burnout = atoi(argv[2]);
 	rules->time_to_compile = atoi(argv[3]);
