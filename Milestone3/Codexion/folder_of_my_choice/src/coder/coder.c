@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 10:23:36 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/14 18:42:14 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/14 18:44:25 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	*coder(void *arg)
 			break ;
 		}
 		action(c, COMPILE);
+		drop_dongles(c);
 		if (!c->sim->finished)
 			break ;
 		action(c, DEBUG);
