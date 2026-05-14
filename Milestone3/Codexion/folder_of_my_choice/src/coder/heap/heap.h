@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   codex.c                                            :+:      :+:    :+:   */
+/*   heap.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/07 10:23:36 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/11 20:17:48 by erjieishere      ###   ########.fr       */
+/*   Created: 2026/05/14 11:06:56 by erjieishere       #+#    #+#             */
+/*   Updated: 2026/05/14 18:09:41 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef HEAP
+#define HEAP
 
-#include "codex.h"
-#include <stdio.h>
+#include "../coder_types.h"
 
-/**
- * Thread have in mind items:
- * time_to_burnout
- * time_to_compile
- * time_to_debug
- * time_to_refactor
- * number_of_compiles_required
- * scheduler
- */
+void	fifo_push_coder(t_coder *coder, t_dongle *queue);
+void	edf_push_coder(t_coder *coder, t_dongle *queue);		//coder es un puntero a un coder unico mientras que queue es un puntero a un array de tamaño 2 de coder
 
-void	*coder(void *arg)
-{
-	return (arg);
-}
+void	pop_coder(t_dongle *dongle);
+
+#endif

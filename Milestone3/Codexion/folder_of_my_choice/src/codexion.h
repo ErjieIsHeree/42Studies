@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 23:33:10 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/11 20:16:20 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/14 11:10:35 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #include <string.h>     // strcmp - strlen - memset
 
 #include "rules/rules.h"
-#include "coder/codex.h"
+#include "coder/coder.h"
 
 typedef struct s_codexion_bench
 {

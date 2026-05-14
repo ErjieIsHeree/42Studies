@@ -6,7 +6,7 @@
 #    By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/03 18:30:11 by erjieishere       #+#    #+#              #
-#    Updated: 2026/05/09 19:42:03 by erjieishere      ###   ########.fr        #
+#    Updated: 2026/05/14 18:39:21 by erjieishere      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ $(NAME): $(SRC) $(OBJS)
 test: $(TEST_SRC)
 	$(CC) $(TEST_SRC) -o $@
 
-cleant:
+tclean:
 	rm -rf test
 
 all: $(NAME)
