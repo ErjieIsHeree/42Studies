@@ -6,32 +6,29 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 23:33:10 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/14 11:10:35 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/14 21:25:48 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CODEXION
 #define CODEXION
 
-#include <pthread.h>    // threads
+#include <pthread.h>
 #include <stdlib.h>     // malloc - free - atoi
 #include <sys/time.h>   // gettimeofday
-#include <unistd.h>     // write - usleep
-#include <stdio.h>      // printf - fprintf
 #include <string.h>     // strcmp - strlen - memset
+
+#include "coder/coder_types.h"
 
 #include "rules/rules.h"
 #include "coder/coder.h"
 
-typedef struct s_codexion_bench
-{
-	t_rules	rules;
-}	t_codexion_bench;
-
 int	codexion(int argc, char **argv);
 
-int	codex_init(t_codexion_bench *codexion_data);
-int	codex_start(t_codexion_bench *codexion_data);
-int	codex_destroy(t_codexion_bench *codexion_data);
+int		codex_init(t_sim *sim);
+int		creation_error(t_sim *sim, t_error error, int size);
+
+int		codex_run(t_sim *sim);
+void	codex_destroy(t_sim *sim);
 
 #endif

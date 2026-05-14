@@ -6,17 +6,19 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 10:23:36 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/14 18:44:25 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/14 22:18:11 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "coder.h"
 
-void	print_log(t_coder *coder, char *log)
+void	print_log(t_coder *coder, char *log, long sleep)
 {
 	
 	struct timeval	current_time;
 
+	if (sleep)
+		usleep(sleep * 1000);  // TODO revisar a ver si imprime 10000 microsec despues o mas
 	pthread_mutex_lock(&coder->sim->log_mutex);
 	gettimeofday(&current_time, NULL);
 	printf("%ld %d %s", current_time.tv_usec, coder->id, log);
@@ -63,7 +65,7 @@ void	action(t_coder *coder, t_action action)
 		sleep_time = coder->sim->time_to_refactor;
 		action = "is refactoring";
 	}
-	print_log(coder, action);
+	print_log(coder, action, 0);
 	if (sleep_time)
 		usleep(sleep_time);
 }
@@ -93,4 +95,32 @@ void	*coder(void *arg)
 			break ;
 	}
 	return (NULL);
+}
+
+void	*monitor(void *args)
+{
+	struct timeval	now;
+	int				all_completed;
+	int				i;
+	t_sim			*sim;
+
+	sim = (t_sim *)args;
+	all_completed = 0;
+	while (!all_completed || !sim->finished)
+	{
+		all_completed = 1;
+		i = -1;
+		while (++i < sim->n_coders || !sim->finished)
+		{
+			if (sim->coders[i].compile_count != sim->compiles_required)
+				all_completed = 0;
+			gettimeofday(&now, NULL);
+			if ((sim->coders[i].compile_count != sim->compiles_required) &&
+					(sim->time_to_burnout - now.tv_usec +
+						sim->coders[i].last_compile) <= 0)
+				sim->finished = 1;
+			if (sim->finished == 1)
+				print_log(&sim->coders[i], "burned out", 10);  // TODO revisar con el TODO de arriba
+		}
+	}
 }

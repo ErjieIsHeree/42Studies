@@ -6,15 +6,24 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 10:15:21 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/11 20:16:17 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/14 21:50:25 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "codexion.h"
 
-int	codex_destroy(t_codexion_bench *codexion_data)
+void	codex_destroy(t_sim *sim)
 {
-	int	error;
+	int	i;
 
-	return (0);
+	i = -1;
+	while (++i < sim->n_coders)
+	{
+		pthread_mutex_destroy(&((sim->dongles + 1)->mutex));
+		pthread_cond_destroy(&((sim->dongles + 1)->cond));
+	}
+	pthread_mutex_destroy(&sim->log_mutex);
+	free(sim->dongles);
+	free(sim->coders);
+	return ;
 }
