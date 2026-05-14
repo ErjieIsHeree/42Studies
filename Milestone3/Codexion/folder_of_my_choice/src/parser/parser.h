@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 18:18:17 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/14 22:48:28 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/14 22:58:33 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <string.h>
 #include <limits.h>
 
-#include "codexion_types.h"
+#include "../codexion_types.h"
 
 int	parse_data(int argc, char **argv, t_sim *sim);
 

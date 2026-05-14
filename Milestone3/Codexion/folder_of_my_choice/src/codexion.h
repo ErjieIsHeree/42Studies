@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 23:33:10 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/14 22:48:51 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/14 23:01:51 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 #include <sys/time.h>   // gettimeofday
 #include <string.h>     // strcmp - strlen - memset
 
-#include "coder/coder_types.h"
+#include "codexion_types.h"
 
-#include "parser.h"
-#include "coder.h"
+#include "parser/parser.h"
+#include "coder/coder.h"
 
 int	codexion(int argc, char **argv);
 
