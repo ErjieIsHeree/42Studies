@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 11:22:46 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/14 21:42:55 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/14 22:49:03 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #define CODER_TYPES
 
 #include <pthread.h>
-#include "../codexion_types.h"
+#include "codexion_types.h"
 
 typedef enum e_scheduler
 {

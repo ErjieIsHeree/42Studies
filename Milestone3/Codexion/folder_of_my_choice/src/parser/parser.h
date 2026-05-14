@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_rules.c                                        :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/05 15:32:11 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/11 20:23:10 by erjieishere      ###   ########.fr       */
+/*   Created: 2026/05/03 18:18:17 by erjieishere       #+#    #+#             */
+/*   Updated: 2026/05/14 22:48:28 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rules.h"
+#ifndef RULES
+#define RULES
 
-int	get_rules(int argc, char **argv, t_rules *rules)
-{
-	int	error;
+#include <stdlib.h>
+#include <string.h>
+#include <limits.h>
 
-	if (argc != 9)
-		return (51);
-	error = parse_data(argc, argv, rules);
-	if (error != 0)
-		return error;
-	error = validate_data(rules);
-	if (error != 0)
-		return error;
-	return 0;
-}
+#include "codexion_types.h"
 
+int	parse_data(int argc, char **argv, t_sim *sim);
+
+#endif

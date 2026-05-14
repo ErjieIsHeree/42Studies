@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 23:33:10 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/14 21:25:48 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/14 22:48:51 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 
 #include "coder/coder_types.h"
 
-#include "rules/rules.h"
-#include "coder/coder.h"
+#include "parser.h"
+#include "coder.h"
 
 int	codexion(int argc, char **argv);
 

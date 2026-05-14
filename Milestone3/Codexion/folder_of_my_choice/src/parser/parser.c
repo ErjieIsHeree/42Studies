@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_data.c                                       :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/05 17:02:55 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/11 20:23:33 by erjieishere      ###   ########.fr       */
+/*   Created: 2026/05/05 15:32:11 by erjieishere       #+#    #+#             */
+/*   Updated: 2026/05/14 22:48:34 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rules.h"
+#include "parser.h"
 
 int	is_invalid_n(char *n)
 {
@@ -27,21 +27,29 @@ int	is_invalid_n(char *n)
 	return (0);
 }
 
-int	parse_data(int argc, char **argv, t_rules *rules)
+int	parse_data(int argc, char **argv, t_sim *sim)
 {
 	int	i;
 
+	if (argc != 9)
+		return (51);
 	i = 0;
 	while (++i < argc - 1)
 		if (is_invalid_n(argv[i]))
 			return (60 + i);
-	rules->number_of_coders = atoi(argv[1]);
-	rules->time_to_burnout = atoi(argv[2]);
-	rules->time_to_compile = atoi(argv[3]);
-	rules->time_to_debug = atoi(argv[4]);
-	rules->time_to_refactor = atoi(argv[5]);
-	rules->number_of_compiles_required = atoi(argv[6]);
-	rules->dongle_cooldown = atoi(argv[7]);
-	rules->scheduler = argv[8];
+	sim->n_coders = atoi(argv[1]);
+	sim->time_to_burnout = atoi(argv[2]);
+	sim->time_to_compile = atoi(argv[3]);
+	sim->time_to_debug = atoi(argv[4]);
+	sim->time_to_refactor = atoi(argv[5]);
+	sim->compiles_required = atoi(argv[6]);
+	sim->dongle_cooldown = atoi(argv[7]);
+	if (strcmp(argv[8], "fifo") == 0)
+		sim->scheduler = FIFO;
+	else if (strcmp(argv[8], "edf") == 0)
+		sim->scheduler = EDF;
+	else
+		return (68);
 	return (0);
 }
+

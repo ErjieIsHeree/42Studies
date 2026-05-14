@@ -6,12 +6,14 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 19:06:32 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/14 22:26:33 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/14 22:50:08 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CODEXION_TYPES
 #define CODEXION_TYPES
+
+#include "coder_types.h"
 
 typedef struct s_sim
 {
