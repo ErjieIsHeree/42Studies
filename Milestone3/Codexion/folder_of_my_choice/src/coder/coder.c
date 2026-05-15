@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 10:23:36 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/14 22:18:11 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/15 00:34:29 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	print_log(t_coder *coder, char *log, long sleep)
 {
-	
 	struct timeval	current_time;
 
 	if (sleep)
-		usleep(sleep * 1000);  // TODO revisar a ver si imprime 10000 microsec despues o mas
+		usleep(sleep);  // TODO revisar a ver si imprime 10000 microsec despues o mas
 	pthread_mutex_lock(&coder->sim->log_mutex);
 	gettimeofday(&current_time, NULL);
-	printf("%ld %d %s", current_time.tv_usec, coder->id, log);
+	printf("%ld %d %s\n", current_time.tv_usec - coder->sim->start_time,
+		coder->id, log);
 	pthread_mutex_unlock(&coder->sim->log_mutex);
 	return ;
 }
@@ -45,12 +45,12 @@ void	action(t_coder *coder, t_action action)
 {
 	struct timeval	now;
 	long			sleep_time;
-	char			*action;
+	char			*s_action;
 
 	if (action == COMPILE)
 	{
 		sleep_time = coder->sim->time_to_compile;
-		action = "is compiling";
+		s_action = "is compiling";
 		coder->compile_count++;
 		gettimeofday(&now, NULL);
 		coder->last_compile = now.tv_usec;
@@ -58,14 +58,14 @@ void	action(t_coder *coder, t_action action)
 	else if (action == DEBUG)
 	{
 		sleep_time = coder->sim->time_to_debug;
-		action = "is debugging";
+		s_action = "is debugging";
 	}
 	else
 	{
 		sleep_time = coder->sim->time_to_refactor;
-		action = "is refactoring";
+		s_action = "is refactoring";
 	}
-	print_log(coder, action, 0);
+	print_log(coder, s_action, 0);
 	if (sleep_time)
 		usleep(sleep_time);
 }
@@ -78,20 +78,20 @@ void	*coder(void *arg)
 	while (c->compile_count < c->sim->compiles_required && !c->sim->finished)
 	{
 		get_dongles(c);
-		if (!c->sim->finished)
+		if (c->sim->finished)
 		{
 			drop_dongles(c);
 			break ;
 		}
 		action(c, COMPILE);
 		drop_dongles(c);
-		if (!c->sim->finished)
+		if (c->sim->finished)
 			break ;
 		action(c, DEBUG);
-		if (!c->sim->finished)
+		if (c->sim->finished)
 			break ;
 		action(c, REFACTOR);
-		if (!c->sim->finished)
+		if (c->sim->finished)
 			break ;
 	}
 	return (NULL);
@@ -106,11 +106,11 @@ void	*monitor(void *args)
 
 	sim = (t_sim *)args;
 	all_completed = 0;
-	while (!all_completed || !sim->finished)
+	while (!all_completed && !sim->finished)
 	{
 		all_completed = 1;
 		i = -1;
-		while (++i < sim->n_coders || !sim->finished)
+		while (++i < sim->n_coders && !sim->finished)
 		{
 			if (sim->coders[i].compile_count != sim->compiles_required)
 				all_completed = 0;
@@ -123,4 +123,5 @@ void	*monitor(void *args)
 				print_log(&sim->coders[i], "burned out", 10);  // TODO revisar con el TODO de arriba
 		}
 	}
+	return (NULL);
 }

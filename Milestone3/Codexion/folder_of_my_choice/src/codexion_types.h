@@ -6,70 +6,79 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 23:01:00 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/14 23:08:49 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/15 23:00:32 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// codexion_types.h - UN SOLO ARCHIVO con todo en orden
 #ifndef CODEXION_TYPES
 #define CODEXION_TYPES
 #include <pthread.h>
 
-// 1. enums primero (no dependen de nadie)
-typedef enum e_scheduler { FIFO, EDF }           t_scheduler;
-typedef enum e_action    { COMPILE, DEBUG, REFACTOR } t_action;
-typedef enum e_error
+typedef enum	e_scheduler
 {
-    MALLOC_ERROR = 101,
-    LOG_MUTEX_CREATION_ERROR = 102,
-    MUTEX_CREATION_ERROR = 103,
-    COND_CREATION_ERROR = 104,
-    THREAD_CREATION_ERROR = 105,
-    MONITOR_CREATION_ERROR = 151,
-    MONITOR_RUNNING_ERROR = 152,
-    THREAD_RUNNING_ERROR = 153
-}   t_error;
+	FIFO,
+	EDF
+}	t_scheduler;
 
-// 2. forward declarations
-typedef struct s_sim    t_sim;
-typedef struct s_coder  t_coder;
-typedef struct s_dongle t_dongle;
-
-// 3. structs en cualquier orden porque todos usan punteros
-typedef struct s_coder
+typedef enum	e_action
 {
-    pthread_t   coder_thread;
-    int         id;
-    long        last_compile;
-    int         compile_count;
-    t_dongle    *left_dongle;
-    t_dongle    *right_dongle;
-    t_sim       *sim;
-}   t_coder;
+	COMPILE,
+	DEBUG,
+	REFACTOR
+}	t_action;
 
-typedef struct s_dongle
+typedef enum 	e_error
 {
-    pthread_mutex_t mutex;
-    pthread_cond_t  cond;
-    long            release_time;
-    t_coder         queue[2];
-    int             queue_size;
-}   t_dongle;
+	LOG_MUTEX_INIT_ERROR = 101,
+    MALLOC_ERROR = 102,
+    MUTEX_INIT_ERROR = 103,
+    COND_INIT_ERROR = 104,
+	QUEUE_MALLOC_ERROR = 105,
+	THREAD_CREATION_ERROR = 151,	// REDO MAYBE ?
+    MONITOR_CREATION_ERROR = 152,
+    MONITOR_RUNNING_ERROR = 153,
+    THREAD_RUNNING_ERROR = 154
+}	t_error;
 
-typedef struct s_sim
+typedef struct	s_sim t_sim;
+typedef struct	s_coder t_coder;
+typedef struct	s_dongle t_dongle;
+
+typedef struct	s_coder
 {
-    int             n_coders;
-    long            time_to_burnout;
-    long            time_to_compile;
-    long            time_to_debug;
-    long            time_to_refactor;
-    int             compiles_required;
-    long            dongle_cooldown;
-    t_scheduler     scheduler;
-    int             finished;
-    pthread_mutex_t log_mutex;
-    t_dongle        *dongles;
-    t_coder         *coders;
-}   t_sim;
+	pthread_t	coder_thread;	// 0
+	int			id;				// its corresponding id 1 - n
+	long		last_compile;	// 0
+	int			compile_count;	// 0
+	t_dongle	*left_dongle;	// left dongle ptr
+	t_dongle	*right_dongle;	// right dongle ptr
+	t_sim		*sim;			// sim ptr
+}	t_coder;
+
+typedef struct	s_dongle
+{
+	pthread_mutex_t	mutex;			// init_mute
+	pthread_cond_t	cond;			// init_cond
+	long			release_time;	// 0
+	t_coder			**queue;		// ptr of ptr
+	int				queue_size;		// 0
+}	t_dongle;
+
+typedef struct	s_sim
+{
+	int				n_coders;			// introduced int
+	long			time_to_burnout;	// introduced int
+	long			time_to_compile;	// introduced int
+	long			time_to_debug;		// introduced int
+	long			time_to_refactor;	// introduced int
+	int				compiles_required;	// introduced int
+	long			dongle_cooldown;	// introduced int
+	long			start_time;			// 0
+	t_scheduler		scheduler;			// 0 fifo - 1 edf
+	int				finished;			// 0
+	pthread_mutex_t	log_mutex;			// init_mutex
+	t_dongle		*dongles;			// dongles ptr
+	t_coder			*coders;			// coders ptr
+}	t_sim;
 
 #endif

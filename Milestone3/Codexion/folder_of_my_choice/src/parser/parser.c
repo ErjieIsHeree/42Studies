@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 15:32:11 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/14 22:48:34 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/15 21:19:47 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ int	parse_data(int argc, char **argv, t_sim *sim)
 		if (is_invalid_n(argv[i]))
 			return (60 + i);
 	sim->n_coders = atoi(argv[1]);
-	sim->time_to_burnout = atoi(argv[2]);
-	sim->time_to_compile = atoi(argv[3]);
-	sim->time_to_debug = atoi(argv[4]);
-	sim->time_to_refactor = atoi(argv[5]);
+	sim->time_to_burnout = atoi(argv[2]) * 1000;
+	sim->time_to_compile = atoi(argv[3]) * 1000;
+	sim->time_to_debug = atoi(argv[4]) * 1000;
+	sim->time_to_refactor = atoi(argv[5]) * 1000;
 	sim->compiles_required = atoi(argv[6]);
-	sim->dongle_cooldown = atoi(argv[7]);
+	sim->dongle_cooldown = atoi(argv[7]) * 1000;
 	if (strcmp(argv[8], "fifo") == 0)
 		sim->scheduler = FIFO;
 	else if (strcmp(argv[8], "edf") == 0)

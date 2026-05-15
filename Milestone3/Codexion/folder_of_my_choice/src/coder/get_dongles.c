@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 21:33:31 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/14 23:06:25 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/15 00:19:11 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ void	request_dongle(t_coder *coder, t_dongle *dongle)
 		fifo_push_coder(coder, dongle);
 	else
 		edf_push_coder(coder, dongle);
-	while (dongle->queue->id != coder->id)
+	while (dongle->queue[0]->id != coder->id)
 		pthread_cond_wait(&dongle->cond,
 			&dongle->mutex);
 }
 
-void	pop_request(t_dongle *r_dongle, t_dongle *l_dongle)
+void	pop_requests(t_dongle *r_dongle, t_dongle *l_dongle)
 {
 	pop_coder(r_dongle);
 	pop_coder(l_dongle);
@@ -44,7 +44,7 @@ void	take_dongle(t_coder *coder, t_dongle *dongle)
 		usleep(dongle_cd);
 		gettimeofday(&current_time, NULL);
 	}
-	print_log(coder, "has taken a dongle");
+	print_log(coder, "has taken a dongle", 0);
 }
 
 void	get_dongles(t_coder	*c)

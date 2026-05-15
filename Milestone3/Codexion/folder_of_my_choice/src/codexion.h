@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 23:33:10 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/14 23:01:51 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/15 22:48:22 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,8 @@
 #include "coder/coder.h"
 
 int	codexion(int argc, char **argv);
-
-int		codex_init(t_sim *sim);
-int		creation_error(t_sim *sim, t_error error, int size);
-
-int		codex_run(t_sim *sim);
-void	codex_destroy(t_sim *sim);
+int	codex_init(t_sim *sim);
+int	codex_run(t_sim *sim);
+int	codex_destroy(t_sim *sim, t_error error, int delete_size);
 
 #endif
