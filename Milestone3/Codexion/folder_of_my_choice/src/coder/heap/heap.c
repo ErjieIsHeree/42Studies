@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 11:06:50 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/15 00:18:25 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/16 19:47:31 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	fifo_push_coder(t_coder *coder, t_dongle *dongle)
 {
-	if (!dongle->queue_size)
+	if (dongle->queue_size == 0)
 		dongle->queue[0] = coder;
 	else
 		dongle->queue[1] = coder;
@@ -26,7 +26,7 @@ void	edf_push_coder(t_coder *coder, t_dongle *dongle)
 {
 	t_coder	*temp_coder;
 
-	if (!dongle->queue_size)
+	if (dongle->queue_size == 0)
 		dongle->queue[0] = coder;
 	else
 	{

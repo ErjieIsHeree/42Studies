@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 23:01:00 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/15 23:00:32 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/16 18:31:07 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ typedef enum 	e_error
     MUTEX_INIT_ERROR = 103,
     COND_INIT_ERROR = 104,
 	QUEUE_MALLOC_ERROR = 105,
-	THREAD_CREATION_ERROR = 151,	// REDO MAYBE ?
+	THREAD_CREATION_ERROR = 151,
     MONITOR_CREATION_ERROR = 152,
-    MONITOR_RUNNING_ERROR = 153,
-    THREAD_RUNNING_ERROR = 154
+    THREAD_JOINING_ERROR = 153,
+    MONITOR_JOINING_ERROR = 154
 }	t_error;
 
 typedef struct	s_sim t_sim;

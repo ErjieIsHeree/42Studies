@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 10:23:36 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/15 00:34:29 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/16 20:12:42 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ void	drop_dongles(t_coder *coder)
 {
 	struct timeval now;
 
+	pthread_mutex_unlock(&coder->left_dongle->mutex);
 	gettimeofday(&now, NULL);
 	coder->left_dongle->release_time = now.tv_usec;
-	coder->right_dongle->release_time = now.tv_usec;
-
-	pthread_mutex_unlock(&coder->left_dongle->mutex);
-	pthread_mutex_unlock(&coder->right_dongle->mutex);
-
 	pthread_cond_broadcast(&coder->left_dongle->cond);
+
+	pthread_mutex_unlock(&coder->right_dongle->mutex);
+	gettimeofday(&now, NULL);
+	coder->right_dongle->release_time = now.tv_usec;
 	pthread_cond_broadcast(&coder->right_dongle->cond);
 }
 
@@ -60,7 +60,7 @@ void	action(t_coder *coder, t_action action)
 		sleep_time = coder->sim->time_to_debug;
 		s_action = "is debugging";
 	}
-	else
+	else if (action == REFACTOR)
 	{
 		sleep_time = coder->sim->time_to_refactor;
 		s_action = "is refactoring";
@@ -74,7 +74,7 @@ void	*coder(void *arg)
 {
 	t_coder	*c;
 
-	c = (t_coder *) arg;
+	c = (t_coder *) arg;  // TODO encuentra todos los errores (ronda entre no incializacion de alguna variable y codex_run)
 	while (c->compile_count < c->sim->compiles_required && !c->sim->finished)
 	{
 		get_dongles(c);
@@ -93,35 +93,6 @@ void	*coder(void *arg)
 		action(c, REFACTOR);
 		if (c->sim->finished)
 			break ;
-	}
-	return (NULL);
-}
-
-void	*monitor(void *args)
-{
-	struct timeval	now;
-	int				all_completed;
-	int				i;
-	t_sim			*sim;
-
-	sim = (t_sim *)args;
-	all_completed = 0;
-	while (!all_completed && !sim->finished)
-	{
-		all_completed = 1;
-		i = -1;
-		while (++i < sim->n_coders && !sim->finished)
-		{
-			if (sim->coders[i].compile_count != sim->compiles_required)
-				all_completed = 0;
-			gettimeofday(&now, NULL);
-			if ((sim->coders[i].compile_count != sim->compiles_required) &&
-					(sim->time_to_burnout - now.tv_usec +
-						sim->coders[i].last_compile) <= 0)
-				sim->finished = 1;
-			if (sim->finished == 1)
-				print_log(&sim->coders[i], "burned out", 10);  // TODO revisar con el TODO de arriba
-		}
 	}
 	return (NULL);
 }

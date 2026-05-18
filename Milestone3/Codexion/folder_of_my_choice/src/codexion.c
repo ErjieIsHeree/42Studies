@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 14:52:52 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/15 22:50:29 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/16 20:00:45 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	codexion(int argc, char **argv)
 		return (error);
 	error = codex_run(&sim);
 	if (error != 0)
-		return (error);
+		return (codex_destroy(&sim, error, sim.n_coders));
 	codex_destroy(&sim, 0, sim.n_coders);
 	return (0);
 }

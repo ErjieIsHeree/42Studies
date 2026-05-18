@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 10:16:10 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/15 22:48:02 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/16 20:01:55 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_coders(t_sim *sim)
 	while (++i < sim->n_coders)
 	{
 		sim->coders->coder_thread = 0;
-		sim->coders->id = i + 1;
+		sim->coders->id = i;
 		sim->coders->last_compile = 0;
 		sim->coders->compile_count = 0;
 		sim->coders->left_dongle = &sim->dongles[i];
@@ -41,11 +41,11 @@ int		init_dongles(t_sim *sim)
 	i = -1;
 	while (++i < sim->n_coders)
 	{
-		if (pthread_mutex_init(&sim->dongles[i].mutex, NULL) != 0);
+		if (pthread_mutex_init(&sim->dongles[i].mutex, NULL) != 0)
 			return (codex_destroy(sim, MUTEX_INIT_ERROR, i)); 
-		if (pthread_cond_init(&sim->dongles[i].cond, NULL) != 0);
+		if (pthread_cond_init(&sim->dongles[i].cond, NULL) != 0)
 			return (codex_destroy(sim, COND_INIT_ERROR, i)); 
-		sim->dongles[i].queue = malloc(sizeof(t_coder) * 2);
+		sim->dongles[i].queue = malloc(sizeof(t_coder *));
 		if (!sim->dongles[i].queue)
 			return (codex_destroy(sim, QUEUE_MALLOC_ERROR, i)); 
 		sim->dongles[i].queue_size = 0;
@@ -60,10 +60,10 @@ int		init_sim(t_sim *sim)
 	sim->finished = 0;
 	if (pthread_mutex_init(&sim->log_mutex, NULL) != 0)
 		return (codex_destroy(sim, LOG_MUTEX_INIT_ERROR, 0));
-	sim->dongles = malloc(sizeof(t_dongle *) * sim->n_coders);
+	sim->dongles = malloc(sizeof(t_dongle) * sim->n_coders);
 	if (!sim->dongles)
 		return (codex_destroy(sim, MALLOC_ERROR, 0));
-	sim->coders = malloc(sizeof(t_coder *) * sim->n_coders);
+	sim->coders = malloc(sizeof(t_coder) * sim->n_coders);
 	if (!sim->dongles)
 		return (codex_destroy(sim, MALLOC_ERROR, 0));
 	return (0);
