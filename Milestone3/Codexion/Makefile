@@ -6,7 +6,7 @@
 #    By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/03 18:30:11 by erjieishere       #+#    #+#              #
-#    Updated: 2026/05/16 19:50:55 by erjieishere      ###   ########.fr        #
+#    Updated: 2026/05/19 12:44:45 by erjieishere      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,11 +28,14 @@ TEST_SRC := ignores/test.c
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
-test: $(TEST_SRC)
+t: $(TEST_SRC)
 	$(CC) $(TEST_SRC) -o $@
 
-tclean:
-	rm -rf test
+rt: $(TEST_SRC)
+	$(CC) $(CFLAGS) $(TEST_SRC) -o $@
+
+tc: $(TEST_SRC)
+	rm -rf t
 
 dbg: $(OBJS)
 	gcc -fsanitize=address -g $(OBJS) -o $(NAME)
