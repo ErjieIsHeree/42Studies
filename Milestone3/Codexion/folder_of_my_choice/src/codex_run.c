@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 22:34:16 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/16 20:04:23 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/19 13:07:54 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		is_alive(t_sim *sim, long last_compile)
 {
 	struct timeval	now;
 	gettimeofday(&now, NULL);
-	if (now.tv_usec - last_compile > sim->time_to_burnout)
+	if (now.tv_usec - last_compile > sim->time_to_burnout && last_compile != 0)
 		return (0);
 	return (1);
 }
@@ -41,7 +41,7 @@ void	*monitor(void *args)
 				if (is_alive(sim, sim->coders[i].last_compile))
 				{
 					sim->finished = 1;
-					print_log(&sim->coders[i], "burned out", 10000);  // TODO revisar con el TODO de arriba	
+					print_log(&sim->coders[i], "burned out", 10000);  // TODO revisar con el TODO de arriba
 				}
 			}
 		}

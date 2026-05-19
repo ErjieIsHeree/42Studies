@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 10:16:10 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/16 20:01:55 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/19 23:18:36 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@ void	init_coders(t_sim *sim)
 	i = -1;
 	while (++i < sim->n_coders)
 	{
-		sim->coders->coder_thread = 0;
-		sim->coders->id = i;
-		sim->coders->last_compile = 0;
-		sim->coders->compile_count = 0;
-		sim->coders->left_dongle = &sim->dongles[i];
+		sim->coders[i].coder_thread = 0;
+		sim->coders[i].id = i;
+		sim->coders[i].last_compile = 0;
+		sim->coders[i].compile_count = 0;
+		sim->coders[i].left_dongle = &sim->dongles[i];
 		if (i == last)
-			sim->coders->right_dongle = &sim->dongles[0];
+			sim->coders[i].right_dongle = &sim->dongles[0];
 		else
-			sim->coders->right_dongle = &sim->dongles[i + 1];
-		sim->coders->sim = sim;
+			sim->coders[i].right_dongle = &sim->dongles[i + 1];
+		sim->coders[i].sim = sim;
 	}
 }
 
@@ -48,7 +48,7 @@ int		init_dongles(t_sim *sim)
 		sim->dongles[i].queue = malloc(sizeof(t_coder *));
 		if (!sim->dongles[i].queue)
 			return (codex_destroy(sim, QUEUE_MALLOC_ERROR, i)); 
-		sim->dongles[i].queue_size = 0;
+		sim->dongles[i].queue_size = i + 1;
 		sim->dongles[i].release_time = 0;
 	}
 	return (0);
