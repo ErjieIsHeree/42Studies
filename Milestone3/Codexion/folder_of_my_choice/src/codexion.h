@@ -6,12 +6,14 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 23:33:10 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/15 22:48:22 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/20 14:59:48 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CODEXION
 #define CODEXION
+
+#include <unistd.h>
 
 #include <pthread.h>
 #include <stdlib.h>     // malloc - free - atoi

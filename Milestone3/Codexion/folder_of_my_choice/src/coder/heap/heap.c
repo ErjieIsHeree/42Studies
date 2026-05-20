@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 11:06:50 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/16 19:47:31 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/20 20:23:35 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	edf_push_coder(t_coder *coder, t_dongle *dongle)
 		dongle->queue[0] = coder;
 	else
 	{
-		if (coder->last_compile > dongle->queue[0]->last_compile)
+		if (coder->last_compile >= dongle->queue[0]->last_compile)
 			dongle->queue[1] = coder;
 		else
 		{
@@ -46,6 +46,7 @@ void	pop_coder(t_dongle *dongle)
 {
 	if (dongle->queue_size == 2)
 		dongle->queue[0] = dongle->queue[1];
+	dongle->queue[1] = NULL;
 	dongle->queue_size--;
 	return ;
 }

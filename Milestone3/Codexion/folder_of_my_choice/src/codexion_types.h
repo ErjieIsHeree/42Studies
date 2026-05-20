@@ -6,12 +6,13 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 23:01:00 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/16 18:31:07 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/20 20:15:21 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CODEXION_TYPES
 #define CODEXION_TYPES
+
 #include <pthread.h>
 
 typedef enum	e_scheduler
@@ -60,6 +61,7 @@ typedef struct	s_dongle
 	pthread_mutex_t	mutex;			// init_mute
 	pthread_cond_t	cond;			// init_cond
 	long			release_time;	// 0
+	pthread_mutex_t	queue_mutex;	// init_mute
 	t_coder			**queue;		// ptr of ptr
 	int				queue_size;		// 0
 }	t_dongle;

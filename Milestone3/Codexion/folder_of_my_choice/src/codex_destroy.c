@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 10:15:21 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/16 18:17:47 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/20 20:01:40 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,11 @@ void	destroy_sim(t_sim *sim, t_error error)
 
 int		codex_destroy(t_sim *sim, t_error error, int delete_size)
 {
+	int	i;
+
+	i = -1;
+	while (++i < sim->n_coders)
+		pthread_mutex_destroy(&sim->dongles[i].queue_mutex);
 	if (error != MALLOC_ERROR && error != LOG_MUTEX_INIT_ERROR)
 		destroy_dongles(sim, error, delete_size);
 	destroy_sim(sim, error);

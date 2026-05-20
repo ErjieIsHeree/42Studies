@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 10:07:53 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/14 23:17:04 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/20 22:12:45 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@
 void	*coder(void *arg);
 void	*monitor(void *arg);
 
-void	print_log(t_coder *coder, char *log, long sleep);
+void	print_log(t_coder *coder, char *log);
 void	get_dongles(t_coder	*c);
+void	pop_requests(t_coder *coder);
 
 #endif

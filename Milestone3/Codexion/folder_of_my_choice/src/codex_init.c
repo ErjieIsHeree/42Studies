@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 10:16:10 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/19 23:18:36 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/20 18:33:52 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_coders(t_sim *sim)
 	while (++i < sim->n_coders)
 	{
 		sim->coders[i].coder_thread = 0;
-		sim->coders[i].id = i;
+		sim->coders[i].id = i + 1;
 		sim->coders[i].last_compile = 0;
 		sim->coders[i].compile_count = 0;
 		sim->coders[i].left_dongle = &sim->dongles[i];
@@ -42,13 +42,14 @@ int		init_dongles(t_sim *sim)
 	while (++i < sim->n_coders)
 	{
 		if (pthread_mutex_init(&sim->dongles[i].mutex, NULL) != 0)
-			return (codex_destroy(sim, MUTEX_INIT_ERROR, i)); 
+			return (codex_destroy(sim, MUTEX_INIT_ERROR, i));
 		if (pthread_cond_init(&sim->dongles[i].cond, NULL) != 0)
-			return (codex_destroy(sim, COND_INIT_ERROR, i)); 
+			return (codex_destroy(sim, COND_INIT_ERROR, i));
 		sim->dongles[i].queue = malloc(sizeof(t_coder *));
+		pthread_mutex_init(&sim->dongles[i].queue_mutex, NULL);
 		if (!sim->dongles[i].queue)
-			return (codex_destroy(sim, QUEUE_MALLOC_ERROR, i)); 
-		sim->dongles[i].queue_size = i + 1;
+			return (codex_destroy(sim, QUEUE_MALLOC_ERROR, i));
+		sim->dongles[i].queue_size = 0;
 		sim->dongles[i].release_time = 0;
 	}
 	return (0);
