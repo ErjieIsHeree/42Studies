@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 10:16:10 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/20 18:33:52 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/21 22:52:02 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ int		init_dongles(t_sim *sim)
 			return (codex_destroy(sim, MUTEX_INIT_ERROR, i));
 		if (pthread_cond_init(&sim->dongles[i].cond, NULL) != 0)
 			return (codex_destroy(sim, COND_INIT_ERROR, i));
-		sim->dongles[i].queue = malloc(sizeof(t_coder *));
-		pthread_mutex_init(&sim->dongles[i].queue_mutex, NULL);
+		sim->dongles[i].queue = malloc(sizeof(t_coder *) * 2);
 		if (!sim->dongles[i].queue)
 			return (codex_destroy(sim, QUEUE_MALLOC_ERROR, i));
+		pthread_mutex_init(&sim->dongles[i].queue_mutex, NULL);
 		sim->dongles[i].queue_size = 0;
 		sim->dongles[i].release_time = 0;
 	}

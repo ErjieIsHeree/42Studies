@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 21:33:31 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/20 22:23:46 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/21 22:55:43 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,10 @@
 
 void	request_dongle_mutex(t_coder *coder, t_dongle *dongle)
 {
-	pthread_mutex_lock(&dongle->queue_mutex);
 	if (coder->sim->scheduler == FIFO)
 		fifo_push_coder(coder, dongle);
 	else
 		edf_push_coder(coder, dongle);
-	pthread_mutex_unlock(&dongle->queue_mutex);
 	pthread_mutex_lock(&dongle->mutex);
 	while (dongle->queue[0]->id != coder->id)  // !! IT NEVER LEAVES THIS WHEN SOMEONE BURNS OUT
 		pthread_cond_wait(&dongle->cond,
@@ -29,12 +27,8 @@ void	request_dongle_mutex(t_coder *coder, t_dongle *dongle)
 
 void	pop_requests(t_coder *coder)
 {
-	pthread_mutex_lock(&coder->right_dongle->queue_mutex);
 	pop_coder(coder->right_dongle);
-	pthread_mutex_unlock(&coder->right_dongle->queue_mutex);
-	pthread_mutex_lock(&coder->left_dongle->queue_mutex);
 	pop_coder(coder->left_dongle);
-	pthread_mutex_unlock(&coder->left_dongle->queue_mutex);
 }
 
 void	take_dongle(t_coder *coder, t_dongle *dongle)
