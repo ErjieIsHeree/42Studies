@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 10:15:21 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/20 20:01:40 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/22 22:20:41 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	destroy_dongles(t_sim *sim, t_error error, int delete_size)
 		pthread_mutex_destroy(&sim->dongles[i].mutex);
 		pthread_cond_destroy(&sim->dongles[i].cond);
 		free(sim->dongles[i].queue);
+		pthread_mutex_destroy(&sim->dongles[i].queue_mutex);
 	}
 	if (error == COND_INIT_ERROR)
 		pthread_mutex_destroy(&sim->dongles[i].mutex);
@@ -38,7 +39,6 @@ void	destroy_dongles(t_sim *sim, t_error error, int delete_size)
 		pthread_cond_destroy(&sim->dongles[i].cond);
 		free(sim->dongles[i].queue);
 	}
-	return ;
 }
 
 void	destroy_sim(t_sim *sim, t_error error)
@@ -55,13 +55,10 @@ void	destroy_sim(t_sim *sim, t_error error)
 
 int		codex_destroy(t_sim *sim, t_error error, int delete_size)
 {
-	int	i;
-
-	i = -1;
-	while (++i < sim->n_coders)
-		pthread_mutex_destroy(&sim->dongles[i].queue_mutex);
 	if (error != MALLOC_ERROR && error != LOG_MUTEX_INIT_ERROR)
 		destroy_dongles(sim, error, delete_size);
+	if (error > QUEUE_MUTEX_INIT_ERROR)
+		pthread_mutex_destroy(&sim->dongles[sim->n_coders - 1].queue_mutex);
 	destroy_sim(sim, error);
 	return (error);
 }

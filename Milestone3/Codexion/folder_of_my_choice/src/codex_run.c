@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 22:34:16 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/20 22:07:04 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/22 22:22:16 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,7 @@ void	*monitor(void *args)
 			{
 				all_completed = 0;
 				if (!is_alive(sim, sim->coders[i].last_compile))
-				{
-					sim->finished = 1;
-					usleep(3);
 					print_log(&sim->coders[i], "burned out");
-				}
 			}
 		}
 	}
@@ -106,5 +102,7 @@ int	codex_run(t_sim *sim)
 	error = join_coders(sim, sim->n_coders);
 	if (pthread_join(monitor_thread, NULL) != 0)
 		error = MONITOR_JOINING_ERROR;
+	if (sim->n_coders == 1)
+		return (YOU_STUPID_BRO);
 	return (error);
 }

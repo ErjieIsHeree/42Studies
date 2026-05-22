@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 21:33:31 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/21 22:55:43 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/22 21:36:52 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,14 @@ void	request_dongle_mutex(t_coder *coder, t_dongle *dongle)
 	else
 		edf_push_coder(coder, dongle);
 	pthread_mutex_lock(&dongle->mutex);
-	while (dongle->queue[0]->id != coder->id)  // !! IT NEVER LEAVES THIS WHEN SOMEONE BURNS OUT
-		pthread_cond_wait(&dongle->cond,
-			&dongle->mutex);
+	while (dongle->queue[0]->id != coder->id)
+		pthread_cond_wait(&dongle->cond, &dongle->mutex);
 }
 
 void	pop_requests(t_coder *coder)
 {
-	pop_coder(coder->right_dongle);
-	pop_coder(coder->left_dongle);
+	pop_coder(coder, coder->right_dongle);
+	pop_coder(coder, coder->left_dongle);
 }
 
 void	take_dongle(t_coder *coder, t_dongle *dongle)
@@ -51,15 +50,15 @@ void	get_dongles(t_coder	*c)
 	if (c->id % 2 == 0)
 	{
 		request_dongle_mutex(c, c->right_dongle);
-		take_dongle(c, c->right_dongle);
 		request_dongle_mutex(c, c->left_dongle);
+		take_dongle(c, c->right_dongle);
 		take_dongle(c, c->left_dongle);
 	}
 	else
 	{
 		request_dongle_mutex(c, c->left_dongle);
-		take_dongle(c, c->left_dongle);
 		request_dongle_mutex(c, c->right_dongle);
+		take_dongle(c, c->left_dongle);
 		take_dongle(c, c->right_dongle);
 	}
 }

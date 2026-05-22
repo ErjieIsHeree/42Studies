@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 10:07:53 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/20 22:12:45 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/22 21:29:39 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <sys/time.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <string.h>
 
 #include "heap/heap.h"
 #include "../codexion_types.h"
