@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 23:33:10 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/20 14:59:48 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/22 22:32:15 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 #include <unistd.h>
 
 #include <pthread.h>
-#include <stdlib.h>     // malloc - free - atoi
-#include <sys/time.h>   // gettimeofday
-#include <string.h>     // strcmp - strlen - memset
+#include <stdlib.h>
+#include <sys/time.h>
+#include <string.h>
 
 #include "codexion_types.h"
 

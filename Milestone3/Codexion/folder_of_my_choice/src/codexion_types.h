@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 23:01:00 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/22 22:18:02 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/22 22:32:04 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,40 +49,40 @@ typedef struct	s_dongle t_dongle;
 
 typedef struct	s_coder
 {
-	pthread_t	coder_thread;	// 0
-	int			id;				// its corresponding id 1 - n
-	long		last_compile;	// 0
-	int			compile_count;	// 0
-	t_dongle	*left_dongle;	// left dongle ptr
-	t_dongle	*right_dongle;	// right dongle ptr
-	t_sim		*sim;			// sim ptr
+	pthread_t	coder_thread;
+	int			id;
+	long		last_compile;
+	int			compile_count;
+	t_dongle	*left_dongle;
+	t_dongle	*right_dongle;
+	t_sim		*sim;
 }	t_coder;
 
 typedef struct	s_dongle
 {
-	pthread_mutex_t	mutex;			// init_mute
-	pthread_cond_t	cond;			// init_cond
-	long			release_time;	// 0
-	pthread_mutex_t	queue_mutex;	// init_mute
-	t_coder			**queue;		// ptr of ptr
-	int				queue_size;		// 0
+	pthread_mutex_t	mutex;
+	pthread_cond_t	cond;
+	long			release_time;
+	pthread_mutex_t	queue_mutex;
+	t_coder			**queue;
+	int				queue_size;
 }	t_dongle;
 
 typedef struct	s_sim
 {
-	int				n_coders;			// introduced int
-	long			time_to_burnout;	// introduced int
-	long			time_to_compile;	// introduced int
-	long			time_to_debug;		// introduced int
-	long			time_to_refactor;	// introduced int
-	int				compiles_required;	// introduced int
-	long			dongle_cooldown;	// introduced int
-	long			start_time;			// 0
-	t_scheduler		scheduler;			// 0 fifo - 1 edf
-	int				finished;			// 0
-	pthread_mutex_t	log_mutex;			// init_mutex
-	t_dongle		*dongles;			// dongles ptr
-	t_coder			*coders;			// coders ptr
+	int				n_coders;
+	long			time_to_burnout;
+	long			time_to_compile;
+	long			time_to_debug;	
+	long			time_to_refactor;
+	int				compiles_required;
+	long			dongle_cooldown;
+	long			start_time;
+	t_scheduler		scheduler;
+	int				finished;
+	pthread_mutex_t	log_mutex;
+	t_dongle		*dongles;
+	t_coder			*coders;
 }	t_sim;
 
 #endif
