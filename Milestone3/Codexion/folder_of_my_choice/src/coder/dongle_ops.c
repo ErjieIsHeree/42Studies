@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 21:33:31 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/22 21:36:52 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/24 19:03:03 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	take_dongle(t_coder *coder, t_dongle *dongle)
 
 	gettimeofday(&tv, NULL);
 	now_ms = tv.tv_sec * 1000 + tv.tv_usec / 1000;
-	dongle_cd = (coder->sim->dongle_cooldown - now_ms + dongle->release_time);
-	if (dongle_cd > 0 && !coder->sim->finished)
+	dongle_cd = (now_ms - coder->sim->dongle_cooldown - dongle->release_time);
+	if (dongle_cd > 0 && !coder->sim->finished && dongle->release_time)
 		usleep(dongle_cd * 1000);
 	if (!coder->sim->finished)
 		print_log(coder, "has taken a dongle");

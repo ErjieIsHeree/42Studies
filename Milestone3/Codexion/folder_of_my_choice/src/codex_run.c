@@ -6,7 +6,7 @@
 /*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 22:34:16 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/22 22:22:16 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/24 18:59:14 by erjieishere      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	create_coders(t_sim *sim)
 	struct timeval	tv;
 
 	i = -1;
+	
 	while (++i < sim->n_coders)
 	{
 		gettimeofday(&tv, NULL);
