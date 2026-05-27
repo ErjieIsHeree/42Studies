@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   heap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
+/*   By: exia <exia@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 11:06:50 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/22 21:33:16 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/27 13:02:26 by exia             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "heap.h"
+#include "../../codexion.h"
 
 void	fifo_push_coder(t_coder *coder, t_dongle *dongle)
 {
@@ -30,7 +31,7 @@ void	edf_push_coder(t_coder *coder, t_dongle *dongle)
 		dongle->queue[0] = coder;
 	else
 	{
-		if (coder->last_compile >= dongle->queue[0]->last_compile)
+		if (get_last_compile(coder) >= get_last_compile(dongle->queue[0]))
 			dongle->queue[1] = coder;
 		else
 		{

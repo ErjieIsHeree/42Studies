@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
+/*   By: exia <exia@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 15:32:11 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/20 16:37:22 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/27 14:47:41 by exia             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	parse_data(int argc, char **argv, t_sim *sim)
 	i = 0;
 	while (++i < argc - 1)
 		if (is_invalid_n(argv[i]))
-			return (60 + i);
+			return (PARSING_ERRORS + i);
 	sim->n_coders = atoi(argv[1]);
 	sim->time_to_burnout = atoi(argv[2]);
 	sim->time_to_compile = atoi(argv[3]);
@@ -48,8 +48,7 @@ int	parse_data(int argc, char **argv, t_sim *sim)
 		sim->scheduler = FIFO;
 	else if (strcmp(argv[8], "edf") == 0)
 		sim->scheduler = EDF;
-	else
-		return (68);
+	else	
+		return (PARSING_SCHEDULER_ERROR);
 	return (0);
 }
-

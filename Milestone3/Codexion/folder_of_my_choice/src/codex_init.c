@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   codex_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
+/*   By: exia <exia@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 10:16:10 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/22 22:17:22 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/27 14:34:23 by exia             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "codexion.h"
 
-void	init_coders(t_sim *sim)
+int	init_coders(t_sim *sim)
 {
 	int	i;
 	int	last;
@@ -21,6 +21,8 @@ void	init_coders(t_sim *sim)
 	i = -1;
 	while (++i < sim->n_coders)
 	{
+		if (pthread_mutex_init(&sim->coders[i].coder_mutex, NULL) != 0)
+			return (codex_destroy(sim, CODER_MUTEX_INIT_ERROR, i));
 		sim->coders[i].coder_thread = 0;
 		sim->coders[i].id = i + 1;
 		sim->coders[i].last_compile = 0;
@@ -32,9 +34,10 @@ void	init_coders(t_sim *sim)
 			sim->coders[i].right_dongle = &sim->dongles[i + 1];
 		sim->coders[i].sim = sim;
 	}
+	return (0);
 }
 
-int		init_dongles(t_sim *sim)
+int	init_dongles(t_sim *sim)
 {
 	int	i;
 
@@ -42,9 +45,9 @@ int		init_dongles(t_sim *sim)
 	while (++i < sim->n_coders)
 	{
 		if (pthread_mutex_init(&sim->dongles[i].mutex, NULL) != 0)
-			return (codex_destroy(sim, MUTEX_INIT_ERROR, i));
+			return (codex_destroy(sim, DONGLE_MUTEX_INIT_ERROR, i));
 		if (pthread_cond_init(&sim->dongles[i].cond, NULL) != 0)
-			return (codex_destroy(sim, COND_INIT_ERROR, i));
+			return (codex_destroy(sim, DONGLE_COND_INIT_ERROR, i));
 		sim->dongles[i].queue = malloc(sizeof(t_coder *) * 2);
 		if (!sim->dongles[i].queue)
 			return (codex_destroy(sim, QUEUE_MALLOC_ERROR, i));
@@ -56,7 +59,7 @@ int		init_dongles(t_sim *sim)
 	return (0);
 }
 
-int		init_sim(t_sim *sim)
+int	init_sim(t_sim *sim)
 {
 	sim->start_time = 0;
 	sim->finished = 0;
@@ -68,12 +71,14 @@ int		init_sim(t_sim *sim)
 	sim->coders = malloc(sizeof(t_coder) * sim->n_coders);
 	if (!sim->dongles)
 		return (codex_destroy(sim, MALLOC_ERROR, 0));
+	if (pthread_mutex_init(&sim->finished_mutex, NULL) != 0)
+		return (codex_destroy(sim, FINISHED_MUTEX_INIT_ERROR, 0));
 	return (0);
 }
 
-int		codex_init(t_sim *sim)
+int	codex_init(t_sim *sim)
 {
-	t_error error;
+	t_error	error;
 
 	error = init_sim(sim);
 	if (error != 0)
@@ -81,6 +86,8 @@ int		codex_init(t_sim *sim)
 	error = init_dongles(sim);
 	if (error != 0)
 		return (error);
-	init_coders(sim);
+	error = init_coders(sim);
+	if (error != 0)
+		return (error);
 	return (0);
 }

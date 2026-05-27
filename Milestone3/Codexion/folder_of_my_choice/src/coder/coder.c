@@ -3,25 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   coder.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
+/*   By: exia <exia@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 10:23:36 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/24 18:59:28 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/27 13:06:47 by exia             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "coder.h"
+#include "../codexion.h"
 
 void	print_log(t_coder *coder, char *log)
 {
 	struct timeval	tv;
 	long			now_ms;
 
-	if (coder->sim->finished)
+	if (get_finished(coder->sim))
 		return ;
 	pthread_mutex_lock(&coder->sim->log_mutex);
 	if (!strcmp(log, "burned out"))
-		coder->sim->finished = 1;
+		set_finished(coder->sim, 1);
 	gettimeofday(&tv, NULL);
 	now_ms = tv.tv_sec * 1000 + tv.tv_usec / 1000;
 	if (!coder->sim->start_time)
@@ -53,16 +54,16 @@ void	compile(t_coder *coder)
 	struct timeval	tv;
 
 	get_dongles(coder);
-	coder->compile_count++;
+	add_compile_count(coder);
 	gettimeofday(&tv, NULL);
 	now_ms = tv.tv_sec * 1000 + tv.tv_usec / 1000;
-	coder->last_compile = now_ms;
+	set_last_compile(coder, now_ms);
 }
 
 void	action(t_coder *coder, t_action action)
 {
-	long			sleep_time;
-	char			*s_action;
+	long	sleep_time;
+	char	*s_action;
 
 	if (action == COMPILE)
 	{
@@ -75,7 +76,7 @@ void	action(t_coder *coder, t_action action)
 		sleep_time = coder->sim->time_to_debug;
 		s_action = "is debugging";
 	}
-	else if (action == REFACTOR)
+	else
 	{
 		sleep_time = coder->sim->time_to_refactor;
 		s_action = "is refactoring";
@@ -92,7 +93,7 @@ void	*coder(void *arg)
 	struct timeval	tv;
 	t_coder			*c;
 
-	c = (t_coder *) arg;
+	c = (t_coder *)arg;
 	if (c->sim->n_coders == 1)
 	{
 		gettimeofday(&tv, NULL);
@@ -100,16 +101,17 @@ void	*coder(void *arg)
 		usleep((c->sim->time_to_burnout) * 1000);
 		return (NULL);
 	}
-	while (c->compile_count < c->sim->compiles_required && !c->sim->finished)
+	while (get_compile_count(c) < c->sim->compiles_required
+		&& !get_finished(c->sim))
 	{
 		action(c, COMPILE);
-		if (c->sim->finished)
+		if (get_finished(c->sim))
 			break ;
 		action(c, DEBUG);
-		if (c->sim->finished)
+		if (get_finished(c->sim))
 			break ;
 		action(c, REFACTOR);
-		if (c->sim->finished)
+		if (get_finished(c->sim))
 			break ;
 	}
 	return (NULL);

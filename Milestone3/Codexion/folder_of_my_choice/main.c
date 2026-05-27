@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+        */
+/*   By: exia <exia@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 18:10:08 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/20 14:59:16 by erjieishere      ###   ########.fr       */
+/*   Updated: 2026/05/26 15:47:30 by exia             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "src/codexion.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    return (codexion(argc, argv));
+	return (codexion(argc, argv));
 }

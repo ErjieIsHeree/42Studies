@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: erjieisheree <erjieisheree@student.42.f    +#+  +:+       +#+         #
+#    By: exia <exia@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/03 18:30:11 by erjieishere       #+#    #+#              #
-#    Updated: 2026/05/22 22:22:45 by erjieishere      ###   ########.fr        #
+#    Updated: 2026/05/27 15:55:17 by exia             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CFLAGS := -Wall -Wextra -Werror -pthread
 NAME := codexion
 
 SRC := folder_of_my_choice/main.c \
-		folder_of_my_choice/src/codexion.c folder_of_my_choice/src/codex_init.c folder_of_my_choice/src/codex_run.c folder_of_my_choice/src/codex_destroy.c \
+		folder_of_my_choice/src/codexion.c folder_of_my_choice/src/codex_init.c folder_of_my_choice/src/codex_run.c folder_of_my_choice/src/codex_destroy.c folder_of_my_choice/src/sim_utils.c folder_of_my_choice/src/dongle_utils.c folder_of_my_choice/src/coder_utils.c \
 		folder_of_my_choice/src/parser/parser.c \
 		folder_of_my_choice/src/coder/coder.c folder_of_my_choice/src/coder/dongle_ops.c \
 		folder_of_my_choice/src/coder/heap/heap.c

@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   dongle_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: exia <exia@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/03 18:18:17 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/26 15:49:17 by exia             ###   ########.fr       */
+/*   Created: 2026/05/27 13:11:21 by exia              #+#    #+#             */
+/*   Updated: 2026/05/27 13:23:19 by exia             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#include "codexion.h"
 
-# include "../codexion_types.h"
-# include <limits.h>
-# include <stdlib.h>
-# include <string.h>
-
-int	parse_data(int argc, char **argv, t_sim *sim);
-
-#endif
+t_coder	*get_first_coder(pthread_mutex_t *queue_mutex, t_coder **queue)
+{
+	t_coder	*c;
+	
+	pthread_mutex_lock(queue_mutex);
+	c = queue[0];
+	pthread_mutex_unlock(queue_mutex);
+	return (c);
+}

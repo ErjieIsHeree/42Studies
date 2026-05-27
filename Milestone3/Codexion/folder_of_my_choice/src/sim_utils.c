@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   sim_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: exia <exia@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/03 18:18:17 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/26 15:49:17 by exia             ###   ########.fr       */
+/*   Created: 2026/05/27 13:11:05 by exia              #+#    #+#             */
+/*   Updated: 2026/05/27 13:22:05 by exia             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#include "codexion.h"
 
-# include "../codexion_types.h"
-# include <limits.h>
-# include <stdlib.h>
-# include <string.h>
+void	set_finished(t_sim *sim, long new_value)
+{
+	pthread_mutex_lock(&sim->finished_mutex);
+	sim->finished = new_value;
+	pthread_mutex_unlock(&sim->finished_mutex);
+}
 
-int	parse_data(int argc, char **argv, t_sim *sim);
+long	get_finished(t_sim *sim)
+{
+	long	val;
 
-#endif
+	pthread_mutex_lock(&sim->finished_mutex);
+	val = sim->finished;
+	pthread_mutex_unlock(&sim->finished_mutex);
+	return (val);
+}
+
