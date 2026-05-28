@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   codexion.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: exia <exia@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: exia <exia@student.42madrid.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 23:33:10 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/27 13:24:18 by exia             ###   ########.fr       */
+/*   Updated: 2026/05/28 11:38:15 by exia             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <string.h>
 # include <sys/time.h>
 # include <unistd.h>
+
+long	get_time(void);
 
 int	codexion(int argc, char **argv);
 int	codex_init(t_sim *sim);

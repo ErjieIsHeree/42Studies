@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   sim_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: exia <exia@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: exia <exia@student.42madrid.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 13:11:05 by exia              #+#    #+#             */
-/*   Updated: 2026/05/27 13:22:05 by exia             ###   ########.fr       */
+/*   Updated: 2026/05/28 11:38:20 by exia             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "codexion.h"
+
+long	get_time(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+}
 
 void	set_finished(t_sim *sim, long new_value)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   codex_run.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: exia <exia@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: exia <exia@student.42madrid.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 22:34:16 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/27 13:10:09 by exia             ###   ########.fr       */
+/*   Updated: 2026/05/28 11:38:09 by exia             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,7 @@
 
 int	is_alive(t_sim *sim, long last_compile)
 {
-	long			now_ms;
-	struct timeval	tv;
-
-	gettimeofday(&tv, NULL);
-	now_ms = tv.tv_sec * 1000 + tv.tv_usec / 1000;
-	if (last_compile != 0 && now_ms - last_compile > sim->time_to_burnout)
+	if (last_compile != 0 && get_time() - last_compile > sim->time_to_burnout)
 		return (0);
 	return (1);
 }
@@ -52,15 +47,11 @@ void	*monitor(void *args)
 int	create_coders(t_sim *sim)
 {
 	int				i;
-	long			now_ms;
-	struct timeval	tv;
 
 	i = -1;
 	while (++i < sim->n_coders)
 	{
-		gettimeofday(&tv, NULL);
-		now_ms = tv.tv_sec * 1000 + tv.tv_usec / 1000;
-		set_last_compile(&sim->coders[i], now_ms);
+		set_last_compile(&sim->coders[i], get_time());
 		if (pthread_create(&sim->coders[i].coder_thread, NULL, coder,
 				&sim->coders[i]) != 0)
 		{

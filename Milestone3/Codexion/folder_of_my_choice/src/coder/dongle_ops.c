@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dongle_ops.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: exia <exia@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: exia <exia@student.42madrid.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 21:33:31 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/27 13:24:04 by exia             ###   ########.fr       */
+/*   Updated: 2026/05/28 11:37:53 by exia             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,9 @@
 
 int	wait_cooldown(long req_cd, t_dongle *dongle)
 {
-	struct timeval	tv;
 	long			cd_left;
-	long			now;
 
-	gettimeofday(&tv, NULL);
-	now = tv.tv_sec * 1000 + tv.tv_usec / 1000;
-	cd_left = req_cd + dongle->release_time - now;
+	cd_left = req_cd + dongle->release_time - get_time();
 	if (cd_left > 0)
 	{
 		usleep(cd_left);
