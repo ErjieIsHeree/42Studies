@@ -6,7 +6,7 @@
 /*   By: exia <exia@student.42madrid.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 15:32:11 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/28 18:18:35 by exia             ###   ########.fr       */
+/*   Updated: 2026/05/28 18:37:09 by exia             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,7 @@ int	parse_data(int argc, char **argv, t_sim *sim)
 		sim->scheduler = EDF;
 	else	
 		return (PARSING_SCHEDULER_ERROR);
+	if (sim->n_coders > MAX_CODERS)
+		return (YOU_STUPID_BRO);
 	return (0);
 }

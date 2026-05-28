@@ -6,7 +6,7 @@
 /*   By: exia <exia@student.42madrid.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 23:01:00 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/28 11:51:43 by exia             ###   ########.fr       */
+/*   Updated: 2026/05/28 18:40:13 by exia             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 # define CODEXION_TYPES_H
 
 # include <pthread.h>
+
+# ifndef MAX_CODERS
+#  define MAX_CODERS 1000	// !! Antes de entregar, ver cual es el maximo q soportan los pc de 42
+# endif
 
 typedef enum e_scheduler
 {

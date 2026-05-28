@@ -6,7 +6,7 @@
 /*   By: exia <exia@student.42madrid.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 21:33:31 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/28 11:37:53 by exia             ###   ########.fr       */
+/*   Updated: 2026/05/28 19:46:20 by exia             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	wait_cooldown(long req_cd, t_dongle *dongle)
 	cd_left = req_cd + dongle->release_time - get_time();
 	if (cd_left > 0)
 	{
-		usleep(cd_left);
+		usleep(cd_left * 1000);
 		return (1);
 	}
 	return (0);
@@ -35,15 +35,14 @@ void	request_dongle_mutex(t_coder *coder, t_dongle *dongle)
 	else
 		edf_push_coder(coder, dongle);
 	pthread_mutex_lock(&dongle->mutex);
+	if (wait_cooldown(coder->sim->dongle_cooldown, dongle))
+		pthread_cond_broadcast(&dongle->cond);
 	while (get_first_coder(&dongle->queue_mutex, dongle->queue)->id
 		!= coder->id)
 	{
 		pthread_cond_wait(&dongle->cond, &dongle->mutex);
 		if (wait_cooldown(coder->sim->dongle_cooldown, dongle))
-		{
-			pthread_mutex_unlock(&dongle->mutex);
 			pthread_cond_broadcast(&dongle->cond);
-		}
 	}
 	print_log(coder, "has taken a dongle");
 }
