@@ -6,7 +6,7 @@
 /*   By: exia <exia@student.42madrid.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 23:01:00 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/28 11:38:11 by exia             ###   ########.fr       */
+/*   Updated: 2026/05/28 11:51:43 by exia             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef enum e_error
 	PARSING_COMPILES_REQUIRED_ERROR = 66,
 	PARSING_DONGLE_COOLDOWN_ERROR = 67,
 	PARSING_SCHEDULER_ERROR = 68,
+	INITILIZATION_ERRORS = 100,
 	LOG_MUTEX_INIT_ERROR = 101,
 	MALLOC_ERROR = 102,
 	FINISHED_MUTEX_INIT_ERROR = 103,
