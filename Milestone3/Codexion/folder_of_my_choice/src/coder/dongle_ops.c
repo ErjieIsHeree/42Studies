@@ -6,7 +6,7 @@
 /*   By: exia <exia@student.42madrid.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 21:33:31 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/28 19:46:20 by exia             ###   ########.fr       */
+/*   Updated: 2026/05/30 18:39:09 by exia             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ int	wait_cooldown(long req_cd, t_dongle *dongle)
 	cd_left = req_cd + dongle->release_time - get_time();
 	if (cd_left > 0)
 	{
+		pthread_mutex_unlock(&dongle->mutex);
 		usleep(cd_left * 1000);
+		pthread_mutex_lock(&dongle->mutex);
 		return (1);
 	}
 	return (0);
@@ -30,11 +32,11 @@ int	wait_cooldown(long req_cd, t_dongle *dongle)
 
 void	request_dongle_mutex(t_coder *coder, t_dongle *dongle)
 {
+	pthread_mutex_lock(&dongle->mutex);
 	if (coder->sim->scheduler == FIFO)
 		fifo_push_coder(coder, dongle);
 	else
 		edf_push_coder(coder, dongle);
-	pthread_mutex_lock(&dongle->mutex);
 	if (wait_cooldown(coder->sim->dongle_cooldown, dongle))
 		pthread_cond_broadcast(&dongle->cond);
 	while (get_first_coder(&dongle->queue_mutex, dongle->queue)->id
@@ -49,8 +51,16 @@ void	request_dongle_mutex(t_coder *coder, t_dongle *dongle)
 
 void	pop_requests(t_coder *coder)
 {
-	pop_coder(coder, coder->right_dongle);
-	pop_coder(coder, coder->left_dongle);
+	if (coder->sim->scheduler == FIFO)
+	{
+		fifo_pop_coder(coder->right_dongle);
+		fifo_pop_coder(coder->left_dongle);
+	}
+	else
+	{
+		edf_pop_coder(coder->right_dongle);
+		edf_pop_coder(coder->left_dongle);
+	}
 }
 
 void	get_dongles(t_coder *c)

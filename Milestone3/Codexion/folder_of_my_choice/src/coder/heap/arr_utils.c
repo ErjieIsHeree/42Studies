@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heap.h                                             :+:      :+:    :+:   */
+/*   arr_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: exia <exia@student.42madrid.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/14 11:06:56 by erjieishere       #+#    #+#             */
-/*   Updated: 2026/05/30 18:32:17 by exia             ###   ########.fr       */
+/*   Created: 2026/05/30 18:31:46 by exia              #+#    #+#             */
+/*   Updated: 2026/05/30 18:36:42 by exia             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEAP_H
-# define HEAP_H
+#include "../../codexion.h"
 
-# include "../../codexion_types.h"
+void	swap_queue_coders(t_coder **a, t_coder **b)
+{
+	t_coder *temp;
 
-void	swap_queue_coders(t_coder **a, t_coder **b);
-
-void	fifo_push_coder(t_coder *coder, t_dongle *dongle);
-void	edf_push_coder(t_coder *coder, t_dongle *dongle);
-
-void	fifo_pop_coder(t_dongle *dongle);
-void	edf_pop_coder(t_dongle *dongle);
-
-#endif
+	write(1, "a", 1);
+	temp = *a;
+	*a = *b;
+	*b = temp;
+	write(1, "a", 1);
+}

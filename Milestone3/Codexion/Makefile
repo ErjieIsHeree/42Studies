@@ -6,7 +6,7 @@
 #    By: exia <exia@student.42madrid.com>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/03 18:30:11 by erjieishere       #+#    #+#              #
-#    Updated: 2026/05/28 19:20:13 by exia             ###   ########.fr        #
+#    Updated: 2026/05/30 18:41:42 by exia             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRC := folder_of_my_choice/main.c \
 		folder_of_my_choice/src/codexion.c folder_of_my_choice/src/codex_init.c folder_of_my_choice/src/codex_run.c folder_of_my_choice/src/codex_destroy.c folder_of_my_choice/src/sim_utils.c folder_of_my_choice/src/dongle_utils.c folder_of_my_choice/src/coder_utils.c \
 		folder_of_my_choice/src/parser/parser.c \
 		folder_of_my_choice/src/coder/coder.c folder_of_my_choice/src/coder/dongle_ops.c \
-		folder_of_my_choice/src/coder/heap/heap.c
+		folder_of_my_choice/src/coder/heap/edf_heap.c folder_of_my_choice/src/coder/heap/fifo_heap.c folder_of_my_choice/src/coder/heap/arr_utils.c
 
 OBJS := $(SRC:.c=.o)
 
