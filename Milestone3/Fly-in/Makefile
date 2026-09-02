@@ -9,7 +9,7 @@ debug: $(SRC)
 
 clean:
 	find . -name __pycache__ -exec rm -rf {} +
-	rm -rf -mypy_cache
+	rm -rf .mypy_cache
 
 lint:
 	python3 -m flake8
