@@ -2,6 +2,8 @@ import re
 from enum import Enum
 from pydantic import BaseModel, Field, model_validator
 
+from .connection import Connection
+
 
 class Zone(Enum):
     NORMAL = 0,
@@ -18,6 +20,9 @@ class Hub(BaseModel):
     zone: Zone
     color: str = Field(min_length=1)
     max_drones: int = Field(gt=0)
+
+    connections: list[Connection] = Field(init=False)
+    steps_left: int = Field(init=False, default=-1)
 
     @model_validator(mode="after")
     def _validate_hub_name(self) -> Hub:
