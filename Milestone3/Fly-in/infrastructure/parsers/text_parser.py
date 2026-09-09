@@ -1,87 +1,92 @@
 import re
-from pydantic import BaseModel, model_validator
+from pydantic import BaseModel
 
 
-from ..application.domain.simulator import Simulator, Hub, Connection
+from ..application.domain import Simulator, Hub, Zone
 
 
-class Parser(BaseModel):
-    file_dir: str
-    sim: Simulator
-
-    @model_validator(mode="after")
-    def _create_simulator(self) -> Parser:
+class TxtParser(BaseModel):
+    def create_simulator(self, file_dir: str) -> Simulator:
         line: str = ""
         nb_drones: int = 0
         hubs: list[Hub] = []
-        connections: list[Connection] = []
 
-        def valid_connection(conn: Connection) -> bool:
-            hub1_n, hub2_n = conn.name.split("-")
-            hubs_names = {hub.name for hub in hubs}
-            return hub1_n in hubs_names and hub2_n in hubs_names
+        i: int = 1
+
+        def get_nb_drones(line: str) -> int:
+            found = re.search(r"^nb_drones:\s+(\d+)\s+\n?$", line)
+            if found:
+                return int(found.group(1))
+            else:
+                raise Exception("Superimpossible regex error")
 
         try:
-            with open(self.file_dir, "r") as f:
+            with open(file_dir, "r") as f:
                 # Check nb of drones is first
-                for line in f:
+                line = f.readline()
+                while not re.fullmatch(r"^nb_drones:\s+\d+\s+\n?$", line):
                     if not line or line.startswith('#'):
-                        pass
-                    elif re.fullmatch(r"nb_drones: \d+\n", line):
-                        found = re.search(r"\d+", line)
-                        if found:
-                            nb_drones = int(found.group())
+                        line = f.readline()
                     else:
-                        raise ValueError("Expected \"nb_drones: <number of dro"
-                                         f"nes>\" as first line, got: {line} i"
-                                         "nstead.")
-                # Check hubs are correctly created
-                for line in f:
-                    # controlar 7 casos (start_hub, hub, end_hub, connection, spaces&comments and others)
-                    if line == "\n" or line.startswith('#'):
-                        pass
-                    elif re.fullmatch(
-                        r"hub:\s+[^\s-]+\s+\-?\d+\s+\-?\d+(\s+\[.*\])\n?",
+                        raise ValueError(
+                            f"Error at line {i}: First line must be 'nb_drones"
+                            ": <number>'"
+                        )
+                    i += 1
+                nb_drones = get_nb_drones(line)
+                # Get hubs
+                for i, line in enumerate(f, i+1):
+                    if re.fullmatch(
+                        r"^hub:\s+[^\s\-]+\s+\-?\d+\s+\-?\d+(\s+\[.*?\])?"
+                        r"\s*\n?$",
                         line
                     ):  # Hub case
                         found = re.search(
-                            r"hub:\s+(.*)\s+(.*)\s+(.*)(?:\s+\[(.*)\])\n?",
+                            r"^hub:\s+(.*?)\s+(\-?\d+)\s+(\-?\d+)(?:\s+\[(.*?)"
+                            r"\])?\s*\n?$",
                             line
                         )
-                        
+                        # TODO create hub and save it
                     elif re.fullmatch(
-                        r"connection:\s+[^\s\-]+\-[^\s\-]+(\s+\[max_link_capac"
-                        r"ity=\d+\])?\n?",
+                        r"^connection:\s+[^\s\-]+\-[^\s\-]+(\s+\[max_link_capa"
+                        r"city=\d+\])?\s*\n?$",
                         line
                     ):  # Connection case
                         found = re.search(
-                            r"connection:\s+(.*)\-(.*)(\s+)?",
+                            r"^connection:\s+(.*?)\-(.*?)(?:\s+\[max_link_capa"
+                            r"city=(\d+)\])?\s*\n?$",
                             line
                         )
+                        # TODO create conn and save it
                     elif re.fullmatch(
-                        r"start_hub:\s+[^\s-]+\s+\-?\d+\s+\-?\d+"
-                        r"(\s+\[.*\])\n?",
+                        r"^start_hub:\s+[^\s-]+\s+\-?\d+\s+\-?\d+(\s+\[.*?\])?"
+                        r"\s*\n?$",
                         line
                     ):  # Start hub case
                         found = re.search(
-                            r"",
+                            r"^.*?\s+(.*?)\s+(.*)?\s+(.*?)(\s+\[(.*?)\])?"
+                            r"\s*\n?$",
                             line
                         )
+                        # TODO create start_hub and save it
                     elif re.fullmatch(
-                        r"end_hub:\s+[^\s-]+\s+\-?\d+\s+\-?\d+(\s+\[.*\])\n?",
+                        r"^end_hub:\s+[^\s-]+\s+\-?\d+\s+\-?\d+(\s+\[.*?\])?"
+                        r"\s*\n?$",
                         line
-                    ):  # End hub case
+                    ):  # Start hub case
                         found = re.search(
-                            r"",
+                            r"^.*?\s+(.*?)\s+(.*)?\s+(.*?)(\s+\[(.*?)\])?"
+                            r"\s*\n?$",
                             line
                         )
+                        # TODO end hub and save it
                     else:
                         raise ValueError(f"The line \"{line}\" doesn't follow "
                                          "the required constraints.")
         except Exception as err:
             print(f"[ERROR]: {err}")
-        return self
-
-    def get_drones_qty(self) -> int:
-        return 0
-    pass
+        return Simulator(
+            nb_drones=nb_drones,
+            hubs=hubs,
+            connections=connections
+        )

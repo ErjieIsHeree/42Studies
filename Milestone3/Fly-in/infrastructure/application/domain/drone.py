@@ -1,11 +1,10 @@
-from pydantic import BaseModel, Field
-
-
+from dataclasses import dataclass, field
 from .hub import Hub
-from .connection import Connection
 
 
-class Drone(BaseModel):
-    number: int = Field(gt=0)
-    location: Hub | Connection
+@dataclass
+class Drone:
+    id: int
+    location: Hub
+    in_connection: bool = field(init=False, default=False)
     pass
