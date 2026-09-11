@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 
-from .hub import Hub
+from infrastructure.application.domain.hub import Hub
 
 
 @dataclass

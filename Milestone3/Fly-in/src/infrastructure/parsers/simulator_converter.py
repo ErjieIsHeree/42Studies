@@ -1,7 +1,7 @@
 import re
 
-
-from infrastructure.application.domain import Simulator, Hub, Zone
+from infrastructure.application.domain.simulator import Simulator
+from infrastructure.application.domain.hub import Hub, Zone
 from infrastructure.parsers.constants import (
     # Regex rules
     NB_DRONES_REGEX,
