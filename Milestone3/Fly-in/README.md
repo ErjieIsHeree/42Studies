@@ -39,9 +39,10 @@ The drones decide which hub to travel and they do it by choosing the lightest we
 
 Well, by each movement the drone do, it will return a string with the direction it went to. At the end just had to put them together and voilà.g
 
-### Example input and expected output demonstrating the program’s functionality.
+### Example input and expected output demonstrating the program’s functionality
 
 No inputs are expected. The program requires you to directly write the maze file root from the execution root.
+> Make sure to install the mazes from the subject page
 
 The output will be follow the next constraint:
 
