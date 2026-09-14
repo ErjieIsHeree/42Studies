@@ -15,5 +15,5 @@ files: list[str] = [
 ]
 
 parser = SimulatorConverter()
-s: Simulator = parser.get_simulator("maps/easy/01_linear_path.txt")
+s: Simulator = parser.get_simulator(".maps/easy/01_linear_path.txt")
 print(s.get_simulation())
