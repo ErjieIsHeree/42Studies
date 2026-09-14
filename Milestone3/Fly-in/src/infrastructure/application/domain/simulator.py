@@ -133,6 +133,6 @@ class Simulator:
                 if i >= run:
                     break
             run += 1
-            result += f" {run} \n"
+            result += "\n"
         return result
     pass
