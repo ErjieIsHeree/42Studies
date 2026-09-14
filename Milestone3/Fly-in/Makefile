@@ -1,7 +1,8 @@
-install:
-	python3 -m pip install -r requirements.txt
+SRC:=src/main.py
 
-run: $(SRC)
+install:
+
+run:
 	python3 $(SRC)
 
 debug: $(SRC)
@@ -12,7 +13,7 @@ clean:
 	rm -rf .mypy_cache
 
 lint:
-	python3 -m flake8
+	python3 -m flake8 .
 	python3 -m mypy . --warn-return-any --warn-unused-ignores --ignore-missing-imports --disallow-untyped-defs --check-untyped-defs
 
 lint-strict:

@@ -119,7 +119,6 @@ class SimulatorConverter():
                         )
             # Check both hub exists
             if not hub1 or not hub2:
-                print([hub.name for hub in hubs])
                 raise ValueError(UNEXISTING_CONN_ERROR.format(line_nb=line_nb))
             connect_hubs(hub1, hub2, max_link_capacity, line_nb)
             return
