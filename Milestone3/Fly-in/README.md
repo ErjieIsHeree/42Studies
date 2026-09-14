@@ -47,7 +47,7 @@ The output will be follow the next constraint:
 
 D<drone_id>-<Hub> or D<drone_id>-<Connection> for the movement of each drone. For example
 
-D1-waypoint1
-D1-waypoint2 D2-waypoint1
-D1-goal D2-waypoint2
-D2-goal
+- D1-waypoint
+- D1-waypoint2 D2-waypoint1
+- D1-goal D2-waypoint2
+- D2-goal
