@@ -9,6 +9,7 @@ install:
 	python3 -m pip -r requirements.txt
 
 run:
+	export UV_CACHE_DIR=/sgoinfre/students/exia/.uv-cache
 	uv run python3 -m $(SRC) $(EXTRA_DATA)
 
 debug:
