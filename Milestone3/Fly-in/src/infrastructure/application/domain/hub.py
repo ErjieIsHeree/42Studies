@@ -42,7 +42,7 @@ class Hub:
     max_drones: int
 
     colored_name: str = field(init=False, default="")
-    hubs: list[tuple[Hub, int]] = field(init=False, default_factory=list)
+    hubs: list[tuple["Hub", int]] = field(init=False, default_factory=list)
     steps_left: int = field(init=False, default=-1)
 
     def __post_init__(self) -> None:
