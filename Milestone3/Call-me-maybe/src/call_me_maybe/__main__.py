@@ -1,31 +1,23 @@
-# import sys
-from llm_sdk import Small_LLM_Model
+
+from call_me_maybe.infrastructure import JsonReader, JsonWriter, QwenLlm
+from call_me_maybe.infrastructure.application import ProcessFunctionCalling
+
+from llm_sdk import Small_LLM_Model  # !! cHECK THIS SHIT
 
 
-def get_args() -> dict[str, str]:
-    """Retreaves """
-    # args: dict[str, str] = {}
+def main():
+    FUNC_CALL_FILE = "data/input/function_calling_tests.json"
+    FUNC_DEF_FILE = "data/input/functions_definition.json"
+    OUTPUT_FILE = "data/output/function_calling_results.json"
 
-    # if len(sys.argv[1:]) % 2 != 0 or len(sys.argv[1:]) > 6:
-    #     raise 
+    cmm_ai_use_case = ProcessFunctionCalling(
+        JsonReader(FUNC_CALL_FILE),
+        JsonReader(FUNC_DEF_FILE),
+        QwenLlm(),
+        JsonWriter(OUTPUT_FILE)
+    )
 
-    # for i, arg in enumerate(sys.argv[1:]):
-    #     if i % 2 != 0:
-    #         arg.startswith("--")
-    #     pass
-
-    return {
-        "functions_definition": "data/input/functions_definition.json",
-        "input": "data/input/function_calling_tests.json",
-        "output": "data/output/function_calls.json"
-    }
-
-
-def main() -> None:
-    magician = Small_LLM_Model()
-    print(magician.encode("HOla"))
-    # magician.get_logits_from_input_ids()
-    # magician.get_path_to_vocab_file()
+    cmm_ai_use_case.execute()
 
 
 if __name__ == "__main__":
