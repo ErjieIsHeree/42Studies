@@ -10,6 +10,7 @@ install:
 
 # Remember to run 'export HF_HOME=/sgoinfre/students/exia/.hf-cache' before starting"
 run:
+	export UV_CACHE_DIR=/sgoinfre/students/exia/.uv-cache
 	uv run python3 -m $(SRC) $(EXTRA_DATA)
 
 debug:
