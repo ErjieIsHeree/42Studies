@@ -3,7 +3,6 @@ import json
 from jsonschema import validate
 from pydantic import BaseModel, ConfigDict, PrivateAttr
 
-
 from call_me_maybe.infrastructure.application.domain import (
     FileReader,
     FileWriter,
@@ -27,7 +26,7 @@ class JsonReader(BaseModel, FileReader):
             validate(data, self.json_schema)
         except Exception as err:
             print(f"[ERROR]: {err}")
-            sys.exit(1)
+            sys.exit(2)
         return data
 
 

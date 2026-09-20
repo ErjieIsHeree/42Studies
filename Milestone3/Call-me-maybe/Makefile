@@ -2,7 +2,7 @@
 SRC:=src.call_me_maybe
 FUNC_DEF:=data/input/functions_definition.json
 INPUT_F:=data/input/function_calling_tests.json
-OUTPUT_F:=data/output/function_calls.json
+OUTPUT_F:=data/output/function_calling_results.json
 EXTRA_DATA:=--functions_definition $(FUNC_DEF) --input $(INPUT_F)  --output $(OUTPUT_F)
 
 install:

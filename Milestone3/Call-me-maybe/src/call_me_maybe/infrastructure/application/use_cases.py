@@ -1,4 +1,5 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
+
 from call_me_maybe.infrastructure.application.domain import (
     FileReader,
     FileWriter,
@@ -16,17 +17,11 @@ class ProcessFunctionCalling(BaseModel):
         llm_client (LLMClient): The LLM wrapper with a constraint decoding
         writer (FileWriter): The file writer
     """
-    def __init__(
-        self,
-        prompt_repository: FileReader,
-        func_defs_repository: FileReader,
-        llm_client: CmmLlmClient,
-        writer: FileWriter
-    ):
-        self.prompt_repository = prompt_repository
-        self.func_defs_repository = func_defs_repository
-        self.llm_client = llm_client
-        self.writer = writer
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+    prompt_repository: FileReader
+    func_defs_repository: FileReader
+    llm_client: CmmLlmClient
+    writer: FileWriter
 
     def execute(self) -> None:
         """This method executes the class objective."""
@@ -49,4 +44,4 @@ class ProcessFunctionCalling(BaseModel):
 
         Return:
             str: The constrained complete answer of the LLM"""
-        return ""
+        return "Hola!"
