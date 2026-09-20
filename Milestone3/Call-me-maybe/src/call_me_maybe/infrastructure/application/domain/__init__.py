@@ -1,7 +1,7 @@
-from .interfaces import LLMClient, FileReader, FileWriter
+from .interfaces import CmmLlmClient, FileReader, FileWriter
 
 __all__: list[str] = [
-    "LLMClient",
+    "CmmLlmClient",
     "FileReader",
     "FileWriter"
 ]

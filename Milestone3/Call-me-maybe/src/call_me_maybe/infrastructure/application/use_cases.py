@@ -1,12 +1,12 @@
-
+from pydantic import BaseModel
 from call_me_maybe.infrastructure.application.domain import (
     FileReader,
     FileWriter,
-    LLMClient
+    CmmLlmClient
 )
 
 
-class ProcessFunctionCalling():
+class ProcessFunctionCalling(BaseModel):
     """This method orquestrates the inputs, generates an adequate answer and
     outputs it.
 
@@ -14,13 +14,13 @@ class ProcessFunctionCalling():
         prompt_repository (FileReader): The prompts file reader
         func_defs_repository (FileReader): The function definitions file reader
         llm_client (LLMClient): The LLM wrapper with a constraint decoding
-        writer (FileWriter): The file 
+        writer (FileWriter): The file writer
     """
     def __init__(
         self,
         prompt_repository: FileReader,
         func_defs_repository: FileReader,
-        llm_client: LLMClient,
+        llm_client: CmmLlmClient,
         writer: FileWriter
     ):
         self.prompt_repository = prompt_repository
@@ -35,7 +35,7 @@ class ProcessFunctionCalling():
         result = self._generate_answer(prompts, functions)
         self.writer.write(result)
 
-    def _generate_answer(self, prompts: str, functions: str) -> str:
+    def _generate_answer(self, prompts: dict, functions: dict) -> str:  # TODO
         """Data will be worked on in order to receive the required answer
 
         Using the LLMClient and the FunctionSchemaConstraint objects, this

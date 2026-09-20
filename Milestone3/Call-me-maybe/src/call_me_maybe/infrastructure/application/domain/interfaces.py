@@ -2,27 +2,24 @@ from abc import ABC, abstractmethod
 
 
 class FileReader(ABC):
-    """"""
-    def __init__(self, filepath: str) -> None:
-        self.filepath = filepath
+    """This class describes how a file reader should work"""
 
     @abstractmethod
-    def read(self) -> str: ...
+    def read(self) -> dict: ...
 
 
 class FileWriter(ABC):
-    """"""
-    def __init__(self, filepath: str) -> None:
-        self.filepath = filepath
+    """This class describes how a file writer should work"""
 
     @abstractmethod
-    def write(self, result: str) -> None: ...
+    def write(self, txt: str) -> None: ...
 
 
-class LLMClient(ABC):
-    """"""
+class CmmLlmClient(ABC):
+    """This abc class represents how a Call_Me_Maybe LLM should work"""
+
     @abstractmethod
-    def generate_logits(self, prompt: str, func_defs: str) -> list[float]: ...
+    def generate_logits(self, tokenized_prompt: list[int]) -> list[float]: ...
 
     @abstractmethod
     def tokenize(self, text: str) -> list[int]: ...

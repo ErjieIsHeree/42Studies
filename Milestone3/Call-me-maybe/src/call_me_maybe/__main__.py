@@ -1,20 +1,23 @@
+import argparse
 
 from call_me_maybe.infrastructure import JsonReader, JsonWriter, QwenLlm
 from call_me_maybe.infrastructure.application import ProcessFunctionCalling
 
-from llm_sdk import Small_LLM_Model  # !! cHECK THIS SHIT
 
+def main():     # TODO getting user args and creating json_schemas
+    """This function uses a Function Calling application applying the
+    Small_LLM_Model from a 42Next project called Call Me Maybe"""
 
-def main():
     FUNC_CALL_FILE = "data/input/function_calling_tests.json"
     FUNC_DEF_FILE = "data/input/functions_definition.json"
     OUTPUT_FILE = "data/output/function_calling_results.json"
+    a = {}
 
     cmm_ai_use_case = ProcessFunctionCalling(
-        JsonReader(FUNC_CALL_FILE),
-        JsonReader(FUNC_DEF_FILE),
+        JsonReader(file_path=FUNC_CALL_FILE, json_schema=a),
+        JsonReader(file_path=FUNC_DEF_FILE, json_schema=a),
         QwenLlm(),
-        JsonWriter(OUTPUT_FILE)
+        JsonWriter(file_path=OUTPUT_FILE)
     )
 
     cmm_ai_use_case.execute()
