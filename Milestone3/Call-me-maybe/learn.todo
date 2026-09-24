@@ -1,5 +1,0 @@
-- Learn how to constrained decode -> Learn how to use numpy for faster searchings
-    - Vocab format, tienen mucho que ver, el vocab no está ordenador xq sí, están
-      así por algo, descúbrelo y harás un constrained decode más rápido
-    - Chat template, es para el post-constrained decoding, averiguar los prompts
-      más efectivos

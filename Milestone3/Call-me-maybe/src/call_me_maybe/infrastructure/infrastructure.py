@@ -1,9 +1,10 @@
 import sys
 import json
+from typing import Any
 from jsonschema import validate
-from pydantic import BaseModel, ConfigDict, PrivateAttr
+from pydantic import BaseModel, ConfigDict, Field
 
-from call_me_maybe.infrastructure.application.domain import (
+from call_me_maybe.domain import (
     FileReader,
     FileWriter,
     CmmLlmClient
@@ -13,11 +14,10 @@ from llm_sdk import Small_LLM_Model
 
 class JsonReader(BaseModel, FileReader):
     """Class used to read and validate a Json, return it as a dict"""
-
     file_path: str
     json_schema: dict
 
-    def read(self) -> dict:
+    def read(self) -> Any:
         """This function validates and return the file_path as a dict"""
 
         try:
@@ -32,12 +32,10 @@ class JsonReader(BaseModel, FileReader):
 
 class JsonWriter(BaseModel, FileWriter):
     """Class used to write a string into a file"""
-
     file_path: str
 
     def write(self, txt: str) -> None:
         """Writes the txt string into file_path"""
-
         try:
             with open(self.file_path, "w") as f:
                 f.write(txt)
@@ -49,24 +47,41 @@ class JsonWriter(BaseModel, FileWriter):
 
 class QwenLlm(BaseModel, CmmLlmClient):
     """This class is a Small_LLM_Model wrapper to make it easier to use"""
-
     model_config = ConfigDict(arbitrary_types_allowed=True)
-    _llm: Small_LLM_Model = PrivateAttr()
 
-    def __init__(self, **data) -> None:
-        super().__init__(**data)
-        self._llm = Small_LLM_Model()
+    llm: Small_LLM_Model = Field(init=False, default=Small_LLM_Model())
+    STC_TK: str = Field(default=r"<tool_call>")
+    ETC_TK: str = Field(default=r"</tool_call>")
+    EOT_TK: str = Field(default=r"<|im_end|>")
+    STC_TK_ID: int = Field(init=False, default=0)
+    ETC_TK_ID: int = Field(init=False, default=0)
+    EOT_TK_ID: int = Field(init=False, default=0)
+
+    def model_post_init(self, __context) -> None:
+        self.STC_TK_ID = self.llm.encode(self.STC_TK)[0].tolist()[0]
+        self.ETC_TK_ID = self.llm.encode(self.ETC_TK)[0].tolist()[0]
+        self.EOT_TK_ID = self.llm.encode(self.EOT_TK)[0].tolist()[0]
+        return
 
     def generate_logits(self, tokenized_prompt: list[int]) -> list[float]:
         """Generates the logits from the actual prompt"""
-        return self._llm.get_logits_from_input_ids(tokenized_prompt)
+        return self.llm.get_logits_from_input_ids(tokenized_prompt)
+
+    def get_vocab(self) -> dict:
+        try:
+            with open(self.llm.get_path_to_vocab_file(), "r") as f:
+                vocab = json.loads(f.read())
+        except Exception as err:
+            print(f"[ERROR]: {err}")
+            sys.exit(1)
+        return vocab
 
     def tokenize(self, text: str) -> list[int]:
         """Converts the text into tokens"""
-        return self._llm.encode(text)[0].tolist()
+        return self.llm.encode(text)[0].tolist()
 
     def untokenize(self, tokens: list[int] | int) -> str:
         """Converts the tokens into text"""
         if isinstance(tokens, int):
             tokens = [tokens]
-        return self._llm.decode(tokens)
+        return self.llm.decode(tokens)

@@ -2,7 +2,6 @@ PROMPTS_FILE = "data/input/function_calling_tests.json"
 FUNCS_FILE = "data/input/functions_definition.json"
 OUTPUT_FILE = "data/output/function_calling_results.json"
 
-# TODO review the schemas
 PROMPTS_JSON_SCHEMA = {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "PromptList",
@@ -81,15 +80,29 @@ FUNCS_JSON_SCHEMA = {
     }
 }
 
-OUTPUT_EXAMPLE = """[
-    {
-        "prompt": "What is the sum of 2 and 3?",
-        "name": "fn_add_numbers",
-        "parameters": {"a": 2.0, "b": 3.0}
-    },
-    {
-        "prompt": "Reverse the string 'hello'",
-        "name": "fn_reverse_string",
-        "parameters": {"s": "hello"}
-    }
-]"""
+S_PROMPT = """<|im_start|>system
+# Tools
+
+You may call one or more functions to assist with the user query.
+
+You are provided with function signatures within <tools></tools> XML tags:
+<tools>
+{functions}
+</tools>
+
+For each function call, return a json object with prompt, function name and
+arguments within <tool_call></tool_call> XML tags, like:
+<tool_call>
+{example}
+</tool_call><|im_end|>
+<|im_start|>user
+"""
+
+ANSWER_EXAMPLE = """{
+    "prompt": <user-prompt>,
+    "name": <function-name>,
+    "parameters": <args-json-object>
+}"""
+
+E_PROMPT = """<|im_end|>
+<|im_start|>assistant"""

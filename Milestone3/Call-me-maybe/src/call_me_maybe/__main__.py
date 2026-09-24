@@ -2,8 +2,8 @@ import sys
 import argparse
 
 from call_me_maybe.infrastructure import JsonReader, JsonWriter, QwenLlm
-from call_me_maybe.infrastructure.application import ProcessFunctionCalling
-from call_me_maybe.infrastructure.application.domain import (
+from call_me_maybe.application import ProcessFunctionCalling
+from call_me_maybe.domain import (
     FUNCS_FILE,
     PROMPTS_FILE,
     OUTPUT_FILE,
