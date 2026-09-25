@@ -60,6 +60,7 @@ class ProcessFunctionCalling(BaseModel):
                     tokenized_answer += [token_id]
                 else:
                     is_answer = False
+        print(self.llm_client.untokenize(tokenized_prompt))
         return self.llm_client.untokenize(tokenized_answer)
 
     def _generate_answer(self, prompts: list, functions: str) -> str:
