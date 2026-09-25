@@ -43,27 +43,20 @@ class ProcessFunctionCalling(BaseModel):
         constrainer = FunctionSchemaConstraint(
             vocab=self.llm_client.get_vocab())
         token_id = 1
-        is_answer = False
 
-        while (token_id != self.llm_client.EOT_TK_ID):
+        while (token_id != self.llm_client.ETC_TK_ID):
             logits = self.llm_client.generate_logits(tokenized_prompt)
-            if not is_answer:
-                token_id = logits.index(max(logits))
-                tokenized_prompt += [token_id]
-                if token_id == self.llm_client.STC_TK_ID:
-                    is_answer = True
-            else:
-                token_id = constrainer.json_contrained_decode(
-                    logits, tokenized_answer, self.llm_client.ETC_TK_ID)
-                tokenized_prompt += [token_id]
-                if token_id != self.llm_client.ETC_TK_ID:
-                    tokenized_answer += [token_id]
-                else:
-                    is_answer = False
-        print(self.llm_client.untokenize(tokenized_prompt))
-        return self.llm_client.untokenize(tokenized_answer)
+            token_id = constrainer.json_contrained_decode(
+                logits, tokenized_answer, self.llm_client.ETC_TK_ID)
+            tokenized_prompt += [token_id]
+            tokenized_answer += [token_id]
+        return self.llm_client.untokenize(tokenized_answer[:-1])
 
-    def _generate_answer(self, prompts: list, functions: str) -> str:
+    def _generate_answer(
+        self,
+        prompts: list[dict[str, str]],
+        functions: str
+    ) -> str:
         """Data will be worked on in order to receive the required answer
 
         Using the LLMClient and the FunctionSchemaConstraint objects, this

@@ -15,7 +15,7 @@ from llm_sdk import Small_LLM_Model
 class JsonReader(BaseModel, FileReader):
     """Class used to read and validate a Json, return it as a dict"""
     file_path: str
-    json_schema: dict
+    json_schema: Any
 
     def read(self) -> Any:
         """This function validates and return the file_path as a dict"""
@@ -57,17 +57,17 @@ class QwenLlm(BaseModel, CmmLlmClient):
     ETC_TK_ID: int = Field(init=False, default=0)
     EOT_TK_ID: int = Field(init=False, default=0)
 
-    def model_post_init(self, __context) -> None:
-        self.STC_TK_ID = self.llm.encode(self.STC_TK)[0].tolist()[0]
-        self.ETC_TK_ID = self.llm.encode(self.ETC_TK)[0].tolist()[0]
-        self.EOT_TK_ID = self.llm.encode(self.EOT_TK)[0].tolist()[0]
+    def model_post_init(self, __context: Any) -> None:
+        self.STC_TK_ID = self.llm.encode(self.STC_TK).cpu()[0].tolist()[0]
+        self.ETC_TK_ID = self.llm.encode(self.ETC_TK).cpu()[0].tolist()[0]
+        self.EOT_TK_ID = self.llm.encode(self.EOT_TK).cpu()[0].tolist()[0]
         return
 
     def generate_logits(self, tokenized_prompt: list[int]) -> list[float]:
         """Generates the logits from the actual prompt"""
         return self.llm.get_logits_from_input_ids(tokenized_prompt)
 
-    def get_vocab(self) -> dict:
+    def get_vocab(self) -> dict[Any, Any]:
         try:
             with open(self.llm.get_path_to_vocab_file(), "r") as f:
                 vocab = json.loads(f.read())
@@ -78,7 +78,7 @@ class QwenLlm(BaseModel, CmmLlmClient):
 
     def tokenize(self, text: str) -> list[int]:
         """Converts the text into tokens"""
-        return self.llm.encode(text)[0].tolist()
+        return self.llm.encode(text).cpu()[0].tolist()
 
     def untokenize(self, tokens: list[int] | int) -> str:
         """Converts the tokens into text"""

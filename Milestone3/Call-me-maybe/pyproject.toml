@@ -9,6 +9,7 @@ authors = [
 requires-python = ">=3.10.12"
 dependencies = [
     "accelerate>=1.15.0",
+    "flake8>=7.4.1",
     "jsonschema>=4.26.0",
     "llm-sdk",
     "numpy>=2.2.6",

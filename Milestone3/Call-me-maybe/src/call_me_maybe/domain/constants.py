@@ -105,4 +105,9 @@ ANSWER_EXAMPLE = """{
 }"""
 
 E_PROMPT = """<|im_end|>
-<|im_start|>assistant"""
+<|im_start|>assistant
+<think>
+
+</think>
+
+<tool_call>"""

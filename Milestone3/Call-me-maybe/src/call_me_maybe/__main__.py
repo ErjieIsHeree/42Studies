@@ -1,5 +1,6 @@
 import sys
 import argparse
+from typing import Any
 
 from call_me_maybe.infrastructure import JsonReader, JsonWriter, QwenLlm
 from call_me_maybe.application import ProcessFunctionCalling
@@ -12,7 +13,7 @@ from call_me_maybe.domain import (
 )
 
 
-def read_args():
+def read_args() -> Any:
     """This method reads the possible args to this program
 
     Raises:
@@ -41,7 +42,7 @@ def read_args():
     return parser.parse_args()
 
 
-def main():
+def main() -> None:
     """This function uses a Function Calling application applying the
     Small_LLM_Model from a 42Next project called Call Me Maybe"""
 
