@@ -9,7 +9,7 @@ from .constants import (
     ANSWER_EXAMPLE,
     E_PROMPT
 )
-from .services import StateMachine
+from .services import StateMachine, random_constrained_decode
 
 __all__: list[str] = [
     "CmmLlmClient",
@@ -23,5 +23,6 @@ __all__: list[str] = [
     "StateMachine",
     "S_PROMPT",
     "ANSWER_EXAMPLE",
-    "E_PROMPT"
+    "E_PROMPT",
+    "random_constrained_decode"
 ]

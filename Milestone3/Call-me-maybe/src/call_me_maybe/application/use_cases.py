@@ -8,7 +8,8 @@ from call_me_maybe.domain import (
     StateMachine,
     S_PROMPT,
     ANSWER_EXAMPLE,
-    E_PROMPT
+    E_PROMPT,
+    random_constrained_decode
 )
 
 
@@ -60,6 +61,8 @@ class ProcessFunctionCalling(BaseModel):
             temp = mc.advance(
                 state, self.llm_client.untokenize(tokenized_answer))
             state = temp
+        tokenized_answer += [random_constrained_decode(
+            self.llm_client.generate_logits(tokenized_prompt))]
         return self.llm_client.untokenize(tokenized_answer[:-1])
 
     def _generate_answer(

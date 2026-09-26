@@ -11,7 +11,7 @@ class StateMachine(BaseModel):
 
     llm: CmmLlmClient
     start_state: int = Field(init=False, default=0)
-    end_state: int = Field(init=False, default=8)
+    end_state: int = Field(init=False, default=6)
     sequence: list[str] = Field(init=False, default_factory=list)
 
     def model_post_init(self, __context: Any) -> None:
@@ -19,11 +19,9 @@ class StateMachine(BaseModel):
             """{\n    "prompt":[^\n]*\n$""",
             """    "name":""",
             """[^\n]*\n$""",
-            """    "parameters": {\n           """,
-            """[^\n]*\n$""",
-            """       """,
-            """[^,\n]*\n$""",
-            """    }\n}\n</tool_call>""",
+            """    "parameters": {\n       """,
+            """[^\n]*[^,]\n$""",
+            """    }\n}\n"""
         ]
 
     def advance(self, state: int, txt: str) -> int:
@@ -39,9 +37,19 @@ class StateMachine(BaseModel):
             return self.llm.tokenize(self.sequence[3])
         elif state == 5:
             return self.llm.tokenize(self.sequence[5])
-        elif state == 7:
-            return self.llm.tokenize(self.sequence[7])
-        elif state > 7 or state < 0:
+        elif state > 5 or state < 0:
             return None
         else:
             return [int(np.argmax(self.llm.generate_logits(tk_prompt)))]
+
+
+def random_constrained_decode(logits: list[float]) -> int:
+    tk_id: int = int(np.argmax(logits))
+
+    def valid(tk_id: int) -> bool:
+        return tk_id == 151658
+
+    while not valid(tk_id):
+        logits[tk_id] = float("-inf")
+        tk_id = int(np.argmax(logits))
+    return tk_id
