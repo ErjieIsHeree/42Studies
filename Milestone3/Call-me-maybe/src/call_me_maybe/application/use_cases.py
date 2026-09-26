@@ -5,7 +5,7 @@ from call_me_maybe.domain import (
     FileReader,
     FileWriter,
     CmmLlmClient,
-    FunctionSchemaConstraint,
+    StateMachine,
     S_PROMPT,
     ANSWER_EXAMPLE,
     E_PROMPT
@@ -39,17 +39,27 @@ class ProcessFunctionCalling(BaseModel):
         self,
         tokenized_prompt: list[int]
     ) -> str:
-        tokenized_answer: list[int] = []
-        constrainer = FunctionSchemaConstraint(
-            vocab=self.llm_client.get_vocab())
-        token_id = 1
+        mc = StateMachine(llm=self.llm_client)
+        state = 0
 
-        while (token_id != self.llm_client.ETC_TK_ID):
-            logits = self.llm_client.generate_logits(tokenized_prompt)
-            token_id = constrainer.json_contrained_decode(
-                logits, tokenized_answer, self.llm_client.ETC_TK_ID)
-            tokenized_prompt += [token_id]
-            tokenized_answer += [token_id]
+        def last_index(lst: list[int], value: int) -> int:
+            for i in range(len(lst) - 1, -1, -1):
+                if lst[i] == value:
+                    return i
+            raise ValueError("[ERROR]: weird error")
+        answer_indx: int = last_index(
+            tokenized_prompt, self.llm_client.STC_TK_ID) + 1
+        tokenized_answer: list[int] = tokenized_prompt[answer_indx:]
+
+        while state != mc.end_state:
+            tokens_id = mc.get_state_need(state, tokenized_prompt)
+            if not tokens_id:
+                raise Exception("Impossible.")
+            tokenized_prompt += tokens_id
+            tokenized_answer += tokens_id
+            temp = mc.advance(
+                state, self.llm_client.untokenize(tokenized_answer))
+            state = temp
         return self.llm_client.untokenize(tokenized_answer[:-1])
 
     def _generate_answer(

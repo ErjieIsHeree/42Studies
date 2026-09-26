@@ -9,7 +9,7 @@ from .constants import (
     ANSWER_EXAMPLE,
     E_PROMPT
 )
-from .services import FunctionSchemaConstraint
+from .services import StateMachine
 
 __all__: list[str] = [
     "CmmLlmClient",
@@ -20,7 +20,7 @@ __all__: list[str] = [
     "OUTPUT_FILE",
     "FUNCS_JSON_SCHEMA",
     "PROMPTS_JSON_SCHEMA",
-    "FunctionSchemaConstraint",
+    "StateMachine",
     "S_PROMPT",
     "ANSWER_EXAMPLE",
     "E_PROMPT"

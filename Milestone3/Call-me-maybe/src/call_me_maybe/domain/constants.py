@@ -110,4 +110,6 @@ E_PROMPT = """<|im_end|>
 
 </think>
 
-<tool_call>"""
+<tool_call>
+{
+    "prompt": """
