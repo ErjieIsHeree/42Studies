@@ -1,6 +1,7 @@
 import sys
 import json
 from typing import Any
+from pathlib import Path
 from jsonschema import validate
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -36,8 +37,10 @@ class JsonWriter(BaseModel, FileWriter):
 
     def write(self, txt: str) -> None:
         """Writes the txt string into file_path"""
+        path = Path(self.file_path)
+        path.parent.mkdir(parents=True, exist_ok=True)
         try:
-            with open(self.file_path, "w") as f:
+            with open(path, "w") as f:
                 f.write(txt)
         except Exception as err:
             print(f"[ERROR]: {err}")

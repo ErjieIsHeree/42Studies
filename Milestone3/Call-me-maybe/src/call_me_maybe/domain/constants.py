@@ -80,22 +80,12 @@ FUNCS_JSON_SCHEMA = {
     }
 }
 
-S_PROMPT = """<|im_start|>system
-# Tools
-
-You may call one or more functions to assist with the user query.
-
-You are provided with function signatures within <tools></tools> XML tags:
+S_PROMPT = """System:
 <tools>
 {functions}
 </tools>
 
-For each function call, return a json object with prompt, function name and
-arguments within <tool_call></tool_call> XML tags, like:
-<tool_call>
-{example}
-</tool_call><|im_end|>
-<|im_start|>user
+User:
 """
 
 ANSWER_EXAMPLE = """{
@@ -104,12 +94,8 @@ ANSWER_EXAMPLE = """{
     "parameters": <args-json-object>
 }"""
 
-E_PROMPT = """<|im_end|>
-<|im_start|>assistant
-<think>
-
-</think>
+E_PROMPT = """Assistant:
 
 <tool_call>
 {
-    "prompt": """
+    "prompt": \""""

@@ -7,7 +7,6 @@ from call_me_maybe.domain import (
     CmmLlmClient,
     StateMachine,
     S_PROMPT,
-    ANSWER_EXAMPLE,
     E_PROMPT,
     random_constrained_decode
 )
@@ -87,7 +86,7 @@ class ProcessFunctionCalling(BaseModel):
             str: The constrained complete answer of the LLM"""
         json_answer = ""
         tokenized_s_prompt = self.llm_client.tokenize(S_PROMPT.format(
-            functions=functions, example=ANSWER_EXAMPLE))
+            functions=functions))
         tokenized_e_prompt = self.llm_client.tokenize(E_PROMPT)
         for i, item in enumerate(prompts, 1):
             prompt = item["prompt"]

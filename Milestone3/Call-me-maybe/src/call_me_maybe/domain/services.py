@@ -24,10 +24,10 @@ class StateMachine(BaseModel):
     def model_post_init(self, __context: Any) -> None:
         """Initializes the regex sequence that defines the state machine."""
         self.sequence: list[str] = [
-            """{\n    "prompt":[^\n]*\n$""",
+            """{\n    "prompt": "[^\n]*\n$""",
             """    "name":""",
             """[^\n]*\n$""",
-            """    "parameters": {\n       """,
+            """    "parameters": {\n       \"""",
             """[^\n]*[^,]\n$""",
             """    }\n}\n"""
         ]
