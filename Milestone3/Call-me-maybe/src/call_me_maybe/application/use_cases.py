@@ -40,10 +40,12 @@ class ProcessFunctionCalling(BaseModel):
         self,
         tokenized_prompt: list[int]
     ) -> str:
+        """Generates the constrained answer for a single tokenized prompt."""
         mc = StateMachine(llm=self.llm_client)
         state = 0
 
         def last_index(lst: list[int], value: int) -> int:
+            """Returns the position of the last occurrence of value in lst"""
             for i in range(len(lst) - 1, -1, -1):
                 if lst[i] == value:
                     return i

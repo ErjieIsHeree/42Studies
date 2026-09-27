@@ -6,14 +6,18 @@ class FileReader(ABC):
     """This class describes how a file reader should work"""
 
     @abstractmethod
-    def read(self) -> Any: ...
+    def read(self) -> Any:
+        """Reads the underlying content and returns it."""
+        ...
 
 
 class FileWriter(ABC):
     """This class describes how a file writer should work"""
 
     @abstractmethod
-    def write(self, txt: str) -> None: ...
+    def write(self, txt: str) -> None:
+        """Writes the given text to the underlying destination."""
+        ...
 
 
 class CmmLlmClient(ABC):
@@ -23,13 +27,21 @@ class CmmLlmClient(ABC):
     EOT_TK_ID: int
 
     @abstractmethod
-    def generate_logits(self, tokenized_prompt: list[int]) -> list[float]: ...
+    def generate_logits(self, tokenized_prompt: list[int]) -> list[float]:
+        """Returns the model logits for the given tokenized prompt."""
+        ...
 
     @abstractmethod
-    def get_vocab(self) -> dict[Any, Any]: ...
+    def get_vocab(self) -> dict[Any, Any]:
+        """Returns the LLM vocabulary."""
+        ...
 
     @abstractmethod
-    def tokenize(self, text: str) -> list[int]: ...
+    def tokenize(self, text: str) -> list[int]:
+        """Converts text into a list of token ids."""
+        ...
 
     @abstractmethod
-    def untokenize(self, tokens: list[int]) -> str: ...
+    def untokenize(self, tokens: list[int]) -> str:
+        """Converts a list of token ids back into text."""
+        ...

@@ -7,6 +7,13 @@ from call_me_maybe.domain import CmmLlmClient
 
 
 class StateMachine(BaseModel):
+    """Drives the constrained decoding of an LLM answer.
+
+    The machine walks through a fixed sequence of regular expressions, one
+    per state, that describe what the generated text must look like at each
+    step. Its job is to tell the caller which tokens should be forced and
+    when the expected structure has been completed.
+    """
     model_config = ConfigDict(arbitrary_types_allowed=True)
 
     llm: CmmLlmClient
@@ -15,6 +22,7 @@ class StateMachine(BaseModel):
     sequence: list[str] = Field(init=False, default_factory=list)
 
     def model_post_init(self, __context: Any) -> None:
+        """Initializes the regex sequence that defines the state machine."""
         self.sequence: list[str] = [
             """{\n    "prompt":[^\n]*\n$""",
             """    "name":""",
@@ -25,12 +33,20 @@ class StateMachine(BaseModel):
         ]
 
     def advance(self, state: int, txt: str) -> int:
+        """Returns the next state if txt matches the current state's regex,
+        otherwise the current state is kept."""
         if re.search(self.sequence[state], txt):
             return state + 1
         return state
 
     def get_state_need(
             self, state: int, tk_prompt: list[int]) -> list[int] | None:
+        """Returns the tokens to append for the given state.
+
+        In forced states the tokens come from the regex itself, otherwise
+        the most likely token is sampled from the model logits. Returns
+        None when the state is out of range.
+        """
         if state == 1:
             return self.llm.tokenize(self.sequence[1])
         elif state == 3:
@@ -44,9 +60,12 @@ class StateMachine(BaseModel):
 
 
 def random_constrained_decode(logits: list[float]) -> int:
+    """Picks the best token, repeatedly banning invalid ones, until the
+    end-of-sequence token is the most likely one."""
     tk_id: int = int(np.argmax(logits))
 
     def valid(tk_id: int) -> bool:
+        """Tells whether a token id is the accepted one."""
         return tk_id == 151658
 
     while not valid(tk_id):

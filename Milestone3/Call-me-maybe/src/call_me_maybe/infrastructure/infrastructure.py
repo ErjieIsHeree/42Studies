@@ -58,6 +58,7 @@ class QwenLlm(BaseModel, CmmLlmClient):
     EOT_TK_ID: int = Field(init=False, default=0)
 
     def model_post_init(self, __context: Any) -> None:
+        """Encodes the special tokens once so their ids are ready to use."""
         self.STC_TK_ID = self.llm.encode(self.STC_TK).cpu()[0].tolist()[0]
         self.ETC_TK_ID = self.llm.encode(self.ETC_TK).cpu()[0].tolist()[0]
         self.EOT_TK_ID = self.llm.encode(self.EOT_TK).cpu()[0].tolist()[0]
@@ -68,6 +69,7 @@ class QwenLlm(BaseModel, CmmLlmClient):
         return self.llm.get_logits_from_input_ids(tokenized_prompt)
 
     def get_vocab(self) -> dict[Any, Any]:
+        """Reads and returns the LLM vocabulary file as a dict"""
         try:
             with open(self.llm.get_path_to_vocab_file(), "r") as f:
                 vocab = json.loads(f.read())
