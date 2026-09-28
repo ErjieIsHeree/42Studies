@@ -63,8 +63,7 @@ class ProcessFunctionCalling(BaseModel):
                 state, self.llm_client.untokenize(tokenized_answer))
         tokenized_answer += [random_constrained_decode(
             self.llm_client.generate_logits(tokenized_prompt))]
-        tka = self.llm_client.tokenize("-")[0]
-        return self.llm_client.untokenize([y for x in tokenized_answer for y in (x, tka)])
+        return self.llm_client.untokenize(tokenized_answer[:-1])
 
     def _generate_answer(
         self,

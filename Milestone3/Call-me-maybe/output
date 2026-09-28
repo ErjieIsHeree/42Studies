@@ -1,0 +1,1523 @@
+export UV_CACHE_DIR=/sgoinfre/students/exia/.uv-cache
+uv run python3 -m src.call_me_maybe --functions_definition data/input/functions_definition.json --input data/input/function_calling_tests.json  --output data/output/function_calling_results.json
+What0 is0 the0 sum0 of0 020 and0 030?",
+1    "name": "2fn2_add2_numbers2",
+3    "parameters": {
+       "4a
+a": "
+a": " 
+a": " 2
+a": " 2",
+
+a": " 2",
+      
+a": " 2",
+       "
+a": " 2",
+       "b
+a": " 2",
+       "b": "
+a": " 2",
+       "b": " 
+a": " 2",
+       "b": " 3
+a": " 2",
+       "b": " 3"
+
+a": " 2",
+       "b": " 3"
+   
+a": " 2",
+       "b": " 3"
+    },
+
+a": " 2",
+       "b": " 3"
+    },
+   
+a": " 2",
+       "b": " 3"
+    },
+    "
+a": " 2",
+       "b": " 3"
+    },
+    "result
+a": " 2",
+       "b": " 3"
+    },
+    "result": "
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+   
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": "
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+   
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": "
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+   
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": "
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\":
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\",
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\":
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+   
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": "
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+}
+
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+}
+<tool_call>
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+}
+<tool_call>
+
+
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+}
+<tool_call>
+
+Assistant
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+   
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": "
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+   
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": "
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn
+a": " 2",
+       "b": " 3"
+    },
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add_numbers",
+    "parameters": " {\"a\":\": 2\", \"b\":\": 3\"}",
+    "result": " 5"
+}
+<tool_call>
+
+Assistant:
+The sum of 2 and 3 is 5.
+<tool_call>
+{
+    "prompt": " 5",
+    "name": " fn_add
