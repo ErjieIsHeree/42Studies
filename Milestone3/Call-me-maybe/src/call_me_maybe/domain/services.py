@@ -45,6 +45,16 @@ class StateMachine(BaseModel):
             return state + 1
         return state
 
+    def _get_special_state_needs(self, tk_prompt: list[int]) -> list[int]:
+        tk: list[int] = []
+        tks: list[int] = []
+        while re.match(r"[^\n]*\n$", self.llm.untokenize(tk_prompt)):
+            tk = [int(np.argmax(self.llm.generate_logits(tk_prompt)))]
+            tks += tk
+            if self.llm.untokenize(tk) == "\":":
+                tks += self.llm.tokenize(" \"")
+        return tks
+
     def get_state_need(
             self, state: int, tk_prompt: list[int]) -> list[int] | None:
         """Returns the tokens to append for the given state.
@@ -57,6 +67,8 @@ class StateMachine(BaseModel):
             return self.llm.tokenize(self.sequence[1])
         elif state == 3:
             return self.llm.tokenize(self.sequence[3])
+        elif state == 4 or state == 6:
+            return self._get_special_state_needs(tk_prompt)
         elif state == 5:
             return self.llm.tokenize(self.sequence[5])
         elif state == 7:
