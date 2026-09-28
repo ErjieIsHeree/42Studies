@@ -1,5 +1,4 @@
 import json
-from tqdm import tqdm
 from pydantic import BaseModel, ConfigDict
 
 from call_me_maybe.domain import (
@@ -89,7 +88,7 @@ class ProcessFunctionCalling(BaseModel):
         tokenized_s_prompt = self.llm_client.tokenize(S_PROMPT.format(
             functions=functions))
         tokenized_e_prompt = self.llm_client.tokenize(E_PROMPT)
-        for i, item in tqdm(enumerate(prompts, 1)):
+        for i, item in enumerate(prompts, 1):
             prompt = item["prompt"]
             json_answer += self._generate_prompt_answer(
                 tokenized_s_prompt + self.llm_client.tokenize(prompt) +
