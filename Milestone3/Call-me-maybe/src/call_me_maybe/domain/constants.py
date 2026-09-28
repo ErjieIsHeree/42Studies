@@ -94,7 +94,8 @@ ANSWER_EXAMPLE = """{
     "parameters": <args-json-object>
 }"""
 
-E_PROMPT = """Assistant:
+E_PROMPT = """
+Assistant:
 
 <tool_call>
 {
