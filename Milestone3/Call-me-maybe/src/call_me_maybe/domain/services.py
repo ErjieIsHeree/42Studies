@@ -18,23 +18,29 @@ class StateMachine(BaseModel):
 
     llm: CmmLlmClient
     start_state: int = Field(init=False, default=0)
-    end_state: int = Field(init=False, default=6)
+    end_state: int = Field(init=False, default=0)
     sequence: list[str] = Field(init=False, default_factory=list)
 
     def model_post_init(self, __context: Any) -> None:
         """Initializes the regex sequence that defines the state machine."""
         self.sequence: list[str] = [
             """{\n    "prompt": "[^\n]*\n$""",
-            """    "name":""",
+            """    "name": \"""",
             """[^\n]*\n$""",
             """    "parameters": {\n       \"""",
+            """[^\n]*,\n$""",
+            """       \"""",
             """[^\n]*[^,]\n$""",
             """    }\n}\n"""
         ]
+        self.end_state = len(self.sequence)
 
     def advance(self, state: int, txt: str) -> int:
         """Returns the next state if txt matches the current state's regex,
         otherwise the current state is kept."""
+        if state == 4:
+            if re.search(self.sequence[6], txt):
+                return 7
         if re.search(self.sequence[state], txt):
             return state + 1
         return state
@@ -53,7 +59,9 @@ class StateMachine(BaseModel):
             return self.llm.tokenize(self.sequence[3])
         elif state == 5:
             return self.llm.tokenize(self.sequence[5])
-        elif state > 5 or state < 0:
+        elif state == 7:
+            return self.llm.tokenize(self.sequence[7])
+        elif state > 7 or state < 0:
             return None
         else:
             return [int(np.argmax(self.llm.generate_logits(tk_prompt)))]

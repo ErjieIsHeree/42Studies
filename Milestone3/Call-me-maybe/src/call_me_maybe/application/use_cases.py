@@ -59,12 +59,12 @@ class ProcessFunctionCalling(BaseModel):
                 raise Exception("Impossible.")
             tokenized_prompt += tokens_id
             tokenized_answer += tokens_id
-            temp = mc.advance(
+            state = mc.advance(
                 state, self.llm_client.untokenize(tokenized_answer))
-            state = temp
         tokenized_answer += [random_constrained_decode(
             self.llm_client.generate_logits(tokenized_prompt))]
-        return self.llm_client.untokenize(tokenized_answer[:-1])
+        tka = self.llm_client.tokenize("-")[0]
+        return self.llm_client.untokenize([y for x in tokenized_answer for y in (x, tka)])
 
     def _generate_answer(
         self,
