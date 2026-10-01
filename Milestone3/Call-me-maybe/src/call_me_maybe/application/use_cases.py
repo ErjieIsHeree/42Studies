@@ -13,14 +13,19 @@ from call_me_maybe.domain import (
 
 
 class ProcessFunctionCalling(BaseModel):
-    """This method orquestrates the inputs, generates an adequate answer and
-    outputs it.
+    """Orchestrates the inputs, generates an adequate answer and outputs it.
+
+    Reads the prompts and the function definitions, feeds both to the LLM
+    through the `StateMachine` constrained decoder, and writes the resulting
+    list of function calls to the output.
 
     Args:
-        prompt_repository (FileReader): The prompts file reader
-        func_defs_repository (FileReader): The function definitions file reader
-        llm_client (LLMClient): The LLM wrapper with a constraint decoding
-        writer (FileWriter): The file writer
+        prompt_repository (FileReader): The prompts file reader.
+        func_defs_repository (FileReader): The function definitions file
+        reader.
+        llm_client (CmmLlmClient): The LLM wrapper driving the constrained
+        decoding.
+        writer (FileWriter): The file writer.
     """
     model_config = ConfigDict(arbitrary_types_allowed=True)
     prompt_repository: FileReader
@@ -29,7 +34,11 @@ class ProcessFunctionCalling(BaseModel):
     writer: FileWriter
 
     def execute(self) -> None:
-        """This method executes the class objective."""
+        """Executes the class objective.
+
+        Reads both input files, generates one constrained answer per
+        prompt, and writes the whole list as a JSON array.
+        """
         prompts = self.prompt_repository.read()
         functions = self.func_defs_repository.read()
         result = self._generate_answer(prompts, json.dumps(functions))
@@ -39,12 +48,41 @@ class ProcessFunctionCalling(BaseModel):
         self,
         tokenized_prompt: list[int]
     ) -> str:
-        """Generates the constrained answer for a single tokenized prompt."""
+        """Generates the constrained answer for a single tokenized prompt.
+
+        Runs the state machine over the tokenized prompt, injecting the
+        forced structural tokens and letting the model sample the free
+        ones, until the answer object is complete.
+
+        Args:
+            tokenized_prompt (list[int]): The whole prompt, system template
+            included, already tokenized.
+
+        Returns:
+            str: The generated answer object, as text.
+
+        Raises:
+            ValueError: If the end-of-text token is missing from the
+            tokenized prompt.
+            Exception: If the state machine asks for tokens in a state out
+            of range.
+        """
         mc = StateMachine(llm=self.llm_client)
         state = 0
 
         def last_index(lst: list[int], value: int) -> int:
-            """Returns the position of the last occurrence of value in lst"""
+            """Returns the position of the last occurrence of value in lst.
+
+            Args:
+                lst (list[int]): The list to search in.
+                value (int): The value to look for.
+
+            Returns:
+                int: The position of the last occurrence of ``value``.
+
+            Raises:
+                ValueError: If ``value`` does not appear in ``lst``.
+            """
             for i in range(len(lst) - 1, -1, -1):
                 if lst[i] == value:
                     return i
@@ -70,19 +108,23 @@ class ProcessFunctionCalling(BaseModel):
         prompts: list[dict[str, str]],
         functions: str
     ) -> str:
-        """Data will be worked on in order to receive the required answer
+        """Generates the constrained answers for every prompt.
 
-        Using the LLMClient and the FunctionSchemaConstraint objects, this
-        method will receive token by token and constraint decode them in order
-        to follow the precised rules for the answer.
+        The functions catalogue is injected once into the system prompt,
+        then every prompt is appended to a shared end prompt and decoded
+        on its own through the `StateMachine` constrained decoder. The
+        resulting objects are joined into a single JSON array.
 
         Args:
-            prompts (str): The user promptas in json
-            functions (str): The functions that could correspond to the user
-            prompt
+            prompts (list[dict[str, str]]): The user prompts, as read from
+            the prompts file.
+            functions (str): The functions that could correspond to the
+            user prompt, as a JSON string.
 
-        Return:
-            str: The constrained complete answer of the LLM"""
+        Returns:
+            str: The constrained complete answers of the LLM, as a JSON
+            array.
+        """
         json_answer = ""
         tokenized_s_prompt = self.llm_client.tokenize(S_PROMPT.format(
             functions=functions))

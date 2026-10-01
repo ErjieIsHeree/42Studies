@@ -14,10 +14,19 @@ from call_me_maybe.domain import (
 
 
 def read_args() -> Any:
-    """This method reads the possible args to this program
+    """Reads the possible args to this program.
+
+    The arguments all fall back to the default paths of the domain
+    constants, so the program can be run without any option.
+
+    Returns:
+        Any: The parsed arguments, exposing ``functions_definition``,
+        ``input`` and ``output``.
 
     Raises:
-        Something if args contain any other unwanted thing"""
+        SystemExit: If the command line cannot be parsed, argparse
+        printing the offending argument and exiting with code 2.
+    """
     parser = argparse.ArgumentParser()
 
     parser.add_argument(
@@ -44,7 +53,14 @@ def read_args() -> Any:
 
 def main() -> None:
     """This function uses a Function Calling application applying the
-    Small_LLM_Model from a 42Next project called Call Me Maybe"""
+    Small_LLM_Model from a 42Next project called Call Me Maybe
+
+    Wires the readers, the writer and the LLM client into the
+    `ProcessFunctionCalling` use case and runs it on the given paths.
+
+    Raises:
+        SystemExit: With code 1 if the arguments cannot be read.
+    """
 
     try:
         args = read_args()
