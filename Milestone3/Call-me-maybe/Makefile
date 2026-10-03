@@ -8,9 +8,9 @@ EXTRA_DATA:=--functions_definition $(FUNC_DEF) --input $(INPUT_F)  --output $(OU
 install:
 	python3 -m pip -r requirements.txt
 
-# Remember to run 'export HF_HOME=/sgoinfre/students/exia/.hf-cache' before starting"
+# Remember to run 'export HF_HOME=/sgoinfre/students/exia/.hf_cache' before starting
+# Remember to run 'export UV_CACHE_DIR=/sgoinfre/students/exia/.uv_cache' before starting
 run:
-	export UV_CACHE_DIR=/sgoinfre/students/exia/.uv-cache
 	uv run python3 -m $(SRC) $(EXTRA_DATA)
 
 debug:
